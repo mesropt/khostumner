@@ -111,7 +111,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Goal**: Verified users (account ≥30 days) vote on promise status; resolved status is set automatically when >50% consensus is reached with ≥25 votes; full vote statistics are always public; admins can reset votes on proven brigading.
 **Mode:** mvp
 **Depends on**: Phase 6
-**Requirements**: VOTE-01, VOTE-02, VOTE-03, VOTE-04
+**Requirements**: VOTE-01, VOTE-02, VOTE-03, VOTE-04, VOTE-05
 **Success Criteria** (what must be TRUE):
   1. Logged-in user with account ≥30 days old and verified email can cast and change a vote on promise status
   2. Each user holds exactly one vote per promise at a time (UNIQUE constraint enforced)

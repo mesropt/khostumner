@@ -28,6 +28,7 @@
 - [ ] **VOTE-02**: Resolved status is set automatically: the leading status wins if it holds >50% of votes AND total votes ≥ configurable minimum (default: 25); otherwise status remains Չգնահատված (Not Rated)
 - [ ] **VOTE-03**: Promise detail page displays vote count per status, total vote count, and current resolved status — always publicly visible
 - [ ] **VOTE-04**: Admin can reset all votes for a promise when coordinated brigading is detected and documented; vote threshold minimum is configurable by admin
+- [ ] **VOTE-05**: Every vote action is recorded in a vote history log (user, promise, status voted, timestamp); when a user changes their vote the old entry is preserved with a `changed_at` timestamp — full audit trail retained indefinitely
 
 ### Politicians & Parties
 
@@ -105,6 +106,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | VOTE-02 | Phase 7 | Pending |
 | VOTE-03 | Phase 7 | Pending |
 | VOTE-04 | Phase 7 | Pending |
+| VOTE-05 | Phase 7 | Pending |
 | POLS-01 | Phase 2 | Pending |
 | POLS-02 | Phase 2 | Pending |
 | POLS-03 | Phase 2 | Pending |
@@ -120,8 +122,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DISC-05 | Phase 3 | Pending |
 
 **Coverage:**
-- v1 requirements: 28 total
-- Mapped to phases: 28
+- v1 requirements: 29 total
+- Mapped to phases: 29
 - Unmapped: 0 ✓
 
 ---
