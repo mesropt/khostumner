@@ -36,7 +36,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. PostgreSQL database is reachable and all schema migrations run cleanly from a fresh state
   4. Seed data loader populates at least 3 politicians, 2 elections, and 5 promises for development use
   5. CI pipeline runs lint and tests and reports pass/fail on every push
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Project scaffold, full DB schema (12 tables), FastAPI health endpoint, Docker Compose, Wave 0 test stubs
+- [ ] 01-02-PLAN.md — Seed data (10 politicians / 4 parties / 4 elections / 20 promises), React/Vite shell wired to health endpoint, GitHub Actions CI
 
 ### Phase 2: Politicians, Parties & Elections Browsing
 **Goal**: Any visitor can browse politician profiles, the full persons list, party/bloc pages, and the elections list and detail pages — with real data served from the API.
@@ -139,7 +143,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/TBD | Not started | - |
+| 1. Foundation | 0/2 | Planned | - |
 | 2. Politicians, Parties & Elections Browsing | 0/TBD | Not started | - |
 | 3. Promise Browsing & Homepage | 0/TBD | Not started | - |
 | 4. Authentication | 0/TBD | Not started | - |
