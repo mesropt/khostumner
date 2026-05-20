@@ -24,9 +24,10 @@
 
 ### Voting & Status
 
-- [ ] **VOTE-01**: Registered user can cast a vote on promise status (Կատարված / Խախտված / Ընթացքի մեջ / Կասեցված / Չգնահատված)
-- [ ] **VOTE-02**: Admin can set or override the final resolved status of any promise
-- [ ] **VOTE-03**: Promise detail page displays vote distribution (counts per status) alongside current resolved status
+- [ ] **VOTE-01**: Registered user (account ≥30 days old, email verified) can cast a vote on promise status (Կատարված / Խախտված / Ընթացքի մեջ / Կասեցված / Չգնահատված) and change their vote at any time
+- [ ] **VOTE-02**: Resolved status is set automatically: the leading status wins if it holds >50% of votes AND total votes ≥ configurable minimum (default: 25); otherwise status remains Չգնահատված (Not Rated)
+- [ ] **VOTE-03**: Promise detail page displays vote count per status, total vote count, and current resolved status — always publicly visible
+- [ ] **VOTE-04**: Admin can reset all votes for a promise when coordinated brigading is detected and documented; vote threshold minimum is configurable by admin
 
 ### Politicians & Parties
 
@@ -103,6 +104,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | VOTE-01 | Phase 7 | Pending |
 | VOTE-02 | Phase 7 | Pending |
 | VOTE-03 | Phase 7 | Pending |
+| VOTE-04 | Phase 7 | Pending |
 | POLS-01 | Phase 2 | Pending |
 | POLS-02 | Phase 2 | Pending |
 | POLS-03 | Phase 2 | Pending |
@@ -118,8 +120,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DISC-05 | Phase 3 | Pending |
 
 **Coverage:**
-- v1 requirements: 27 total
-- Mapped to phases: 27
+- v1 requirements: 28 total
+- Mapped to phases: 28
 - Unmapped: 0 ✓
 
 ---

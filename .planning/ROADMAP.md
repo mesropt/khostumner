@@ -108,15 +108,16 @@ Decimal phases appear between their surrounding integers in numeric order.
 **UI hint**: yes
 
 ### Phase 7: Community Voting & Status System
-**Goal**: Registered users can vote on the resolved status of any promise, the admin can override any vote outcome, and every promise detail page shows the vote distribution alongside the final resolved status.
+**Goal**: Verified users (account ≥30 days) vote on promise status; resolved status is set automatically when >50% consensus is reached with ≥25 votes; full vote statistics are always public; admins can reset votes on proven brigading.
 **Mode:** mvp
 **Depends on**: Phase 6
-**Requirements**: VOTE-01, VOTE-02, VOTE-03
+**Requirements**: VOTE-01, VOTE-02, VOTE-03, VOTE-04
 **Success Criteria** (what must be TRUE):
-  1. Logged-in user can cast a vote on a promise status (Կատարված / Խախտված / Ընթացքի մեջ / Կասեցված / Չգնահատված) and change their vote
-  2. Each user can only hold one vote per promise at a time (UNIQUE constraint enforced)
-  3. Admin can set or override the final resolved_status of any promise, and the admin's status always takes precedence over community votes
-  4. Promise detail page displays vote counts per status alongside the current resolved status
+  1. Logged-in user with account ≥30 days old and verified email can cast and change a vote on promise status
+  2. Each user holds exactly one vote per promise at a time (UNIQUE constraint enforced)
+  3. Resolved status updates automatically when leading option exceeds >50% of total votes AND total votes ≥ 25 (configurable); otherwise status stays Չգնահատված
+  4. Promise detail page shows vote count per status, total votes, and current resolved status — always visible to all visitors
+  5. Admin can reset all votes for a promise (with documented brigading reason); vote threshold minimum is configurable in admin settings
 **Plans**: TBD
 
 ### Phase 8: Search & Statistics
