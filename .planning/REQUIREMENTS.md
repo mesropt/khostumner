@@ -89,39 +89,39 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| AUTH-01 | — | Pending |
-| AUTH-02 | — | Pending |
-| AUTH-03 | — | Pending |
-| AUTH-04 | — | Pending |
-| AUTH-05 | — | Pending |
-| PROM-01 | — | Pending |
-| PROM-02 | — | Pending |
-| PROM-03 | — | Pending |
-| PROM-04 | — | Pending |
-| PROM-05 | — | Pending |
-| PROM-06 | — | Pending |
-| VOTE-01 | — | Pending |
-| VOTE-02 | — | Pending |
-| VOTE-03 | — | Pending |
-| POLS-01 | — | Pending |
-| POLS-02 | — | Pending |
-| POLS-03 | — | Pending |
-| POLS-04 | — | Pending |
-| POLS-05 | — | Pending |
-| ELEC-01 | — | Pending |
-| ELEC-02 | — | Pending |
-| ELEC-03 | — | Pending |
-| DISC-01 | — | Pending |
-| DISC-02 | — | Pending |
-| DISC-03 | — | Pending |
-| DISC-04 | — | Pending |
-| DISC-05 | — | Pending |
+| AUTH-01 | Phase 4 | Pending |
+| AUTH-02 | Phase 4 | Pending |
+| AUTH-03 | Phase 4 | Pending |
+| AUTH-04 | Phase 4 | Pending |
+| AUTH-05 | Phase 4 | Pending |
+| PROM-01 | Phase 3 | Pending |
+| PROM-02 | Phase 3 | Pending |
+| PROM-03 | Phase 5 | Pending |
+| PROM-04 | Phase 5 | Pending |
+| PROM-05 | Phase 6 | Pending |
+| PROM-06 | Phase 6 | Pending |
+| VOTE-01 | Phase 7 | Pending |
+| VOTE-02 | Phase 7 | Pending |
+| VOTE-03 | Phase 7 | Pending |
+| POLS-01 | Phase 2 | Pending |
+| POLS-02 | Phase 2 | Pending |
+| POLS-03 | Phase 2 | Pending |
+| POLS-04 | Phase 6 | Pending |
+| POLS-05 | Phase 6 | Pending |
+| ELEC-01 | Phase 2 | Pending |
+| ELEC-02 | Phase 2 | Pending |
+| ELEC-03 | Phase 5 | Pending |
+| DISC-01 | Phase 3 | Pending |
+| DISC-02 | Phase 3 | Pending |
+| DISC-03 | Phase 3 | Pending |
+| DISC-04 | Phase 8 | Pending |
+| DISC-05 | Phase 3 | Pending |
 
 **Coverage:**
 - v1 requirements: 27 total
-- Mapped to phases: 0 (roadmap pending)
-- Unmapped: 27 ⚠️
+- Mapped to phases: 27
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-05-20*
-*Last updated: 2026-05-20 after initial definition*
+*Last updated: 2026-05-20 after roadmap creation*
