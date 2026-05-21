@@ -10,28 +10,28 @@ See: .planning/PROJECT.md (updated 2026-05-20)
 ## Current Position
 
 Phase: 1 of 8 (Foundation)
-Plan: 0 of 2 in current phase
-Status: Ready to execute
-Last activity: 2026-05-21 — Phase 1 planned; 2 plans in 2 waves created and verified
+Plan: 1 of 2 in current phase
+Status: In progress
+Last activity: 2026-05-21 — Plan 01-01 complete; backend scaffold + full 12-table schema + health endpoint
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [█░░░░░░░░░] 6%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 0
-- Average duration: —
-- Total execution time: 0 hours
+- Total plans completed: 1
+- Average duration: ~35 minutes
+- Total execution time: 0.6 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| - | - | - | - |
+| 1. Foundation | 1/2 | ~35m | ~35m |
 
 **Recent Trend:**
-- Last 5 plans: —
-- Trend: —
+- Last 5 plans: 01-01 (~35m)
+- Trend: On track
 
 *Updated after each plan completion*
 
@@ -46,6 +46,9 @@ Recent decisions affecting current work:
 - Roadmap: Individual vote rows with UNIQUE(promise_id, user_id); stats_cache table for fulfillment percentages
 - Roadmap: Admin override always beats community vote for `resolved_status`
 - Roadmap: Stack is FastAPI (Python) + React/Vite + PostgreSQL; no Next.js server actions
+- 01-01: ModerationStatus defined once in promises.py; imported by evidence.py (no SAEnum redefinition)
+- 01-01: Alembic env.py swaps postgresql+asyncpg:// → postgresql:// for sync migration runner
+- 01-01: Initial migration written manually (no live DB at plan time); CI validates against real postgres
 
 ### Pending Todos
 
@@ -64,5 +67,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-05-21
-Stopped at: Phase 1 planned — 2 plans created, verified (0 blockers), ready to execute.
-Resume file: .planning/phases/01-foundation/01-01-PLAN.md
+Stopped at: Plan 01-01 complete — backend scaffold, 12-table schema, health endpoint, Docker Compose
+Resume file: .planning/phases/01-foundation/01-02-PLAN.md

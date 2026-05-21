@@ -41,7 +41,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 Plans:
 
 **Wave 1**
-- [ ] 01-01-PLAN.md — Project scaffold, full DB schema (12 tables), FastAPI health endpoint, Docker Compose, Wave 0 test stubs
+- [x] 01-01-PLAN.md — Project scaffold, full DB schema (12 tables), FastAPI health endpoint, Docker Compose, Wave 0 test stubs
 
 **Wave 2** *(blocked on Wave 1 completion)*
 - [ ] 01-02-PLAN.md — Seed data (10 politicians / 4 parties / 4 elections / 20 promises), React/Vite shell wired to health endpoint, GitHub Actions CI
@@ -151,7 +151,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/2 | Planned | - |
+| 1. Foundation | 1/2 | In progress | - |
 | 2. Politicians, Parties & Elections Browsing | 0/TBD | Not started | - |
 | 3. Promise Browsing & Homepage | 0/TBD | Not started | - |
 | 4. Authentication | 0/TBD | Not started | - |
