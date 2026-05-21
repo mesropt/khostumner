@@ -15,7 +15,7 @@ Armenian political promise tracker. Wikipedia-style site where users and admins 
 1. **Two separate status fields** on every promise: `moderation_status` (is content visible?) and `resolved_status` (is promise kept/broken?). Never merge them.
 2. **Individual vote rows** with `UNIQUE(promise_id, user_id)` — never store only an aggregate tally.
 3. **stats_cache table** holds precomputed fulfillment percentages. Politician profile pages read from it. Never GROUP BY on every request.
-4. **Admin override beats community vote** — `resolved_status` set by admin always takes precedence.
+4. **No admin status override** — `resolved_status` is set ONLY by community vote threshold (>50% with ≥25 votes). Admins can ONLY reset votes when proven brigading is documented (VOTE-04). Admins never set `resolved_status` directly.
 
 ## GSD Workflow
 

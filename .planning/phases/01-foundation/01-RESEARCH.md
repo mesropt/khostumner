@@ -1485,22 +1485,13 @@ describe("App", () => {
 
 ---
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **pydantic-settings package**
-   - What we know: pydantic v2 split `BaseSettings` into a separate `pydantic-settings` package
-   - What's unclear: Version confirmation needed — `pip index versions pydantic-settings` was not run
-   - Recommendation: Planner adds `pydantic-settings` to requirements and verifies version during execution
+1. **pydantic-settings package** — RESOLVED: Plans include `pydantic-settings` in `backend/requirements.txt`; executor verifies the exact version via `pip index versions pydantic-settings` during execution.
 
-2. **Seed data: complete Armenian politician names and promise text**
-   - What we know: 10 politicians, 4 parties, 4 elections, 20 promises with `[TEST DATA]` marker (D-16, D-17)
-   - What's unclear: Exact names, promise quotes in Armenian, and promise distribution across elections/statuses
-   - Recommendation: Planner writes the full seed fixture during execution wave. Promise quotes should be clearly fictional while referencing real election years. All must be Armenian-script (հայերեն).
+2. **Seed data: complete Armenian politician names and promise text** — RESOLVED: Plan 01-02 Task 1 includes the full seed fixture with 10 real Armenian politician names, 4 parties (HHK, BHK, QQ, HHSh), 4 elections (2018 presidential/parliamentary, 2021 parliamentary, 2024 local), and 20 promises with `[TEST DATA]` markers and Armenian-script quotes.
 
-3. **`asyncio_mode` change in pytest-asyncio 1.x**
-   - What we know: Version 1.3.0 is latest; 1.x introduced stricter defaults vs. 0.x
-   - What's unclear: Whether `asyncio_mode = "auto"` is still the recommended setting in 1.x or if a new default applies
-   - Recommendation: Set `asyncio_mode = "auto"` in pytest config and verify during initial test run
+3. **`asyncio_mode` in pytest-asyncio 1.x** — RESOLVED: Plans set `asyncio_mode = "auto"` in `backend/pyproject.toml` `[tool.pytest.ini_options]`. This is the recommended setting per pytest-asyncio 1.x migration guide.
 
 ---
 

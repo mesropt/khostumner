@@ -57,7 +57,7 @@ created: 2026-05-21
 - [ ] `backend/tests/test_seed.py` — count assertions for politicians/elections/promises, stub for SC-4
 - [ ] `frontend/src/App.test.tsx` — renders without crashing, stub for SC-2
 - [ ] `backend/pyproject.toml` pytest section — `asyncio_mode = "auto"`, `testpaths = ["tests"]`
-- [ ] `frontend/vitest.config.ts` — `jsdom` environment, `@testing-library/react` setup
+- [ ] `frontend/vite.config.ts` (test section) — vitest `jsdom` environment and `@testing-library/react` setup embedded in vite config (Vite 6 integrated testing)
 
 ---
 

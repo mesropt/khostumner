@@ -39,8 +39,16 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 2 plans
 
 Plans:
+
+**Wave 1**
 - [ ] 01-01-PLAN.md — Project scaffold, full DB schema (12 tables), FastAPI health endpoint, Docker Compose, Wave 0 test stubs
+
+**Wave 2** *(blocked on Wave 1 completion)*
 - [ ] 01-02-PLAN.md — Seed data (10 politicians / 4 parties / 4 elections / 20 promises), React/Vite shell wired to health endpoint, GitHub Actions CI
+
+**Cross-cutting constraints:**
+- Two-status fields (`moderation_status` + `resolved_status`) must never be merged — enforced in both plans
+- Alembic URL swap: `postgresql+asyncpg://` (runtime) ↔ `postgresql://` (migrations) — enforced in 01-01
 
 ### Phase 2: Politicians, Parties & Elections Browsing
 **Goal**: Any visitor can browse politician profiles, the full persons list, party/bloc pages, and the elections list and detail pages — with real data served from the API.
