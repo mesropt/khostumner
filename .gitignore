@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+*.egg
+
+# Environment
+.env
+
+# Node
+node_modules/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Database
+postgres_data/
+
+# IDE
+.idea/
+.vscode/
+*.swp
