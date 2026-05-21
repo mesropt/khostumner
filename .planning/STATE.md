@@ -10,27 +10,27 @@ See: .planning/PROJECT.md (updated 2026-05-20)
 ## Current Position
 
 Phase: 1 of 8 (Foundation)
-Plan: 1 of 2 in current phase
-Status: In progress
-Last activity: 2026-05-21 — Plan 01-01 complete; backend scaffold + full 12-table schema + health endpoint
+Plan: 2 of 2 in current phase
+Status: Phase complete — all plans done
+Last activity: 2026-05-21 — Plan 01-02 complete; seed data loader, React/Vite frontend shell, CI pipeline
 
-Progress: [█░░░░░░░░░] 6%
+Progress: [██░░░░░░░░] 12%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 1
-- Average duration: ~35 minutes
-- Total execution time: 0.6 hours
+- Total plans completed: 2
+- Average duration: ~21 minutes
+- Total execution time: 0.9 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 1. Foundation | 1/2 | ~35m | ~35m |
+| 1. Foundation | 2/2 | ~41m | ~21m |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (~35m)
+- Last 5 plans: 01-01 (~35m), 01-02 (~6m)
 - Trend: On track
 
 *Updated after each plan completion*
@@ -49,6 +49,11 @@ Recent decisions affecting current work:
 - 01-01: ModerationStatus defined once in promises.py; imported by evidence.py (no SAEnum redefinition)
 - 01-01: Alembic env.py swaps postgresql+asyncpg:// → postgresql:// for sync migration runner
 - 01-01: Initial migration written manually (no live DB at plan time); CI validates against real postgres
+- 01-02: Tailwind v4 CSS-first: @import "tailwindcss" only; no postcss.config.js or tailwind.config.js
+- 01-02: Vite HMR port 24678 explicitly set in vite.config.ts for Docker port mapping
+- 01-02: Seed idempotency via Party.limit(1) check; ENVIRONMENT=production guard prevents production runs
+- 01-02: App.test.tsx wraps App in MemoryRouter to avoid router nesting in test context
+- 01-02: ENVIRONMENT=ci_no_seed skips test_seed_data_counts in CI (seed not run during CI pytest)
 
 ### Pending Todos
 
@@ -67,5 +72,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-05-21
-Stopped at: Plan 01-01 complete — backend scaffold, 12-table schema, health endpoint, Docker Compose
-Resume file: .planning/phases/01-foundation/01-02-PLAN.md
+Stopped at: Plan 01-02 complete — seed data loader, React/Vite frontend shell, GitHub Actions CI
+Resume file: None (Phase 1 complete — start /gsd:verify-work 1)

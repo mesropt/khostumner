@@ -14,7 +14,7 @@ Every v1 requirement maps to exactly one phase. The first user-facing capability
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Foundation** - FastAPI + React/Vite + PostgreSQL scaffold, full DB schema, CI pipeline, seed data loader
+- [x] **Phase 1: Foundation** - FastAPI + React/Vite + PostgreSQL scaffold, full DB schema, CI pipeline, seed data loader
 - [ ] **Phase 2: Politicians, Parties & Elections Browsing** - Read-only public pages for politicians, parties, and elections
 - [ ] **Phase 3: Promise Browsing & Homepage** - Read-only promise list, detail pages, homepage stats, section pages, OG tags
 - [ ] **Phase 4: Authentication** - Email/password registration, email verification, password reset, OAuth, persistent JWT sessions
@@ -44,7 +44,7 @@ Plans:
 - [x] 01-01-PLAN.md — Project scaffold, full DB schema (12 tables), FastAPI health endpoint, Docker Compose, Wave 0 test stubs
 
 **Wave 2** *(blocked on Wave 1 completion)*
-- [ ] 01-02-PLAN.md — Seed data (10 politicians / 4 parties / 4 elections / 20 promises), React/Vite shell wired to health endpoint, GitHub Actions CI
+- [x] 01-02-PLAN.md — Seed data (10 politicians / 4 parties / 4 elections / 20 promises), React/Vite shell wired to health endpoint, GitHub Actions CI
 
 **Cross-cutting constraints:**
 - Two-status fields (`moderation_status` + `resolved_status`) must never be merged — enforced in both plans
@@ -151,7 +151,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 1/2 | In progress | - |
+| 1. Foundation | 2/2 | Complete | 2026-05-21 |
 | 2. Politicians, Parties & Elections Browsing | 0/TBD | Not started | - |
 | 3. Promise Browsing & Homepage | 0/TBD | Not started | - |
 | 4. Authentication | 0/TBD | Not started | - |
