@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.database import engine
-from app.routers import elections, health, parties, politicians
+from app.routers import elections, health, og, parties, politicians, promises, stats
 
 
 @asynccontextmanager
@@ -34,3 +34,6 @@ app.include_router(health.router)
 app.include_router(politicians.router, prefix="/api")
 app.include_router(parties.router, prefix="/api")
 app.include_router(elections.router, prefix="/api")
+app.include_router(promises.router, prefix="/api")
+app.include_router(stats.router, prefix="/api")
+app.include_router(og.router, prefix="/api")
