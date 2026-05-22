@@ -59,3 +59,40 @@ export interface PromiseStubOut {
   quote_hy: string
   resolved_status: "not_rated" | "kept" | "broken" | "in_progress" | "stalled"
 }
+
+export interface PromiseListOut {
+  id: string
+  slug: string
+  title_hy: string
+  quote_hy: string // pre-truncated to ~120 chars by router
+  resolved_status: "not_rated" | "kept" | "broken" | "in_progress" | "stalled"
+  politician_name_hy: string
+  made_date: string | null
+}
+
+export interface PromiseDetailOut {
+  id: string
+  slug: string
+  title_hy: string
+  quote_hy: string // full text, no truncation
+  resolved_status: "not_rated" | "kept" | "broken" | "in_progress" | "stalled"
+  made_date: string | null
+  expected_date: string | null
+  source_url: string
+  archived_url: string | null
+  politician_name_hy: string
+  politician_slug: string
+}
+
+export interface StatsByStatus {
+  kept: number
+  broken: number
+  in_progress: number
+  stalled: number
+  not_rated: number
+}
+
+export interface StatsOut {
+  total: number
+  by_status: StatsByStatus
+}
