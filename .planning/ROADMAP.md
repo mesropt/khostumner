@@ -15,7 +15,7 @@ Every v1 requirement maps to exactly one phase. The first user-facing capability
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation** - FastAPI + React/Vite + PostgreSQL scaffold, full DB schema, CI pipeline, seed data loader
-- [ ] **Phase 2: Politicians, Parties & Elections Browsing** - Read-only public pages for politicians, parties, and elections
+- [x] **Phase 2: Politicians, Parties & Elections Browsing** - Read-only public pages for politicians, parties, and elections (completed 2026-05-22)
 - [ ] **Phase 3: Promise Browsing & Homepage** - Read-only promise list, detail pages, homepage stats, section pages, OG tags
 - [ ] **Phase 4: Authentication** - Email/password registration, email verification, password reset, OAuth, persistent JWT sessions
 - [ ] **Phase 5: Promise Submission** - Registered users submit and edit promises; election linking
@@ -76,7 +76,7 @@ Plans:
 - [x] 02-03-PLAN.md — Party page slice: PartyOut schema + expanded parties router (detail/members/promises) + PartyPage (POLS-03)
 
 **Wave 4** *(blocked on Wave 3 completion)*
-- [ ] 02-04-PLAN.md — Elections slice: ElectionOut/ElectionWithCountOut schemas + elections router (list with promise count/detail/promises) + ElectionsListPage + ElectionDetailPage + human verification checkpoint (ELEC-01, ELEC-02)
+- [x] 02-04-PLAN.md — Elections slice: ElectionOut/ElectionWithCountOut schemas + elections router (list with promise count/detail/promises) + ElectionsListPage + ElectionDetailPage + human verification checkpoint (ELEC-01, ELEC-02)
 
 **Cross-cutting constraints:**
 - All promise queries on public pages MUST filter `moderation_status=approved` — enforced in politicians, parties, elections routers
@@ -172,7 +172,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 2/2 | Complete | 2026-05-21 |
-| 2. Politicians, Parties & Elections Browsing | 3/4 | In Progress|  |
+| 2. Politicians, Parties & Elections Browsing | 4/4 | Complete   | 2026-05-22 |
 | 3. Promise Browsing & Homepage | 0/TBD | Not started | - |
 | 4. Authentication | 0/TBD | Not started | - |
 | 5. Promise Submission | 0/TBD | Not started | - |

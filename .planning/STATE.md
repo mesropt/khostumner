@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-03-PLAN.md party page vertical slice
-last_updated: "2026-05-22T18:12:00.000Z"
-last_activity: 2026-05-22 — Phase 2 Plan 03 complete
+stopped_at: Completed 02-04-PLAN.md elections browsing vertical slice — checkpoint pending
+last_updated: "2026-05-22T18:30:00.000Z"
+last_activity: 2026-05-22 — Phase 2 Plan 04 complete (pending human-verify checkpoint)
 progress:
   total_phases: 8
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 6
-  completed_plans: 5
-  percent: 13
+  completed_plans: 6
+  percent: 25
 ---
 
 # Project State
@@ -25,12 +25,12 @@ See: .planning/PROJECT.md (updated 2026-05-20)
 
 ## Current Position
 
-Phase: 2 of 8 (Politicians, Parties & Elections Browsing) — **IN PROGRESS**
+Phase: 2 of 8 (Politicians, Parties & Elections Browsing) — **AWAITING CHECKPOINT**
 Next phase: 3 of 8 (Promise Browsing & Homepage)
-Status: Executing Phase 2 — Plans 01+02+03 complete, plan 04 remaining
-Last activity: 2026-05-22 — Phase 2 Plan 03 complete
+Status: All 4 plans complete — awaiting human-verify checkpoint for Phase 2 sign-off
+Last activity: 2026-05-22 — Phase 2 Plan 04 complete
 
-Progress: [████████░░] 83%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
@@ -83,6 +83,8 @@ Recent decisions affecting current work:
 - 02-02: PaginationControls pageParamKey prop allows /persons (?page) and /persons/:slug (?ppage) to coexist
 - 02-02: GET /api/parties/{slug} stub included in plan 02 to satisfy Wave 0 test_parties.py::test_get_party
 - 02-03: Party promises query uses JOIN approach (Promise JOIN Politician WHERE party_id == party.id) with ModerationStatus.approved filter (T-02-10)
+- 02-04: ElectionWithCountOut is plain BaseModel (no from_attributes) — correlated subquery returns Row tuples; must unpack election_obj and count explicitly in router
+- 02-04: Promise count subquery counts all linked promises (not approved-only); approved filter only applies to /promises endpoint
 
 ### Pending Todos
 
@@ -100,6 +102,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-22T18:12:00.000Z
-Stopped at: Completed 02-03-PLAN.md party page vertical slice
-Resume at: Execute 02-04-PLAN.md (elections router)
+Last session: 2026-05-22T18:30:00.000Z
+Stopped at: Completed 02-04-PLAN.md elections browsing — human-verify checkpoint pending
+Resume at: After human approves checkpoint — run /gsd:verify-work 2 or proceed to Phase 3
