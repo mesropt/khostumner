@@ -32,16 +32,16 @@
 
 ### Politicians & Parties
 
-- [ ] **POLS-01**: Anyone can view a politician profile page (photo, full name, current role, party affiliation, promise list, fulfillment percentage)
-- [ ] **POLS-02**: Anyone can browse the "Persons" section — paginated list of all politicians with filtering
-- [ ] **POLS-03**: Anyone can view a party or bloc page showing all linked promises and member politicians
+- [x] **POLS-01**: Anyone can view a politician profile page (photo, full name, current role, party affiliation, promise list, fulfillment percentage)
+- [x] **POLS-02**: Anyone can browse the "Persons" section — paginated list of all politicians with filtering
+- [x] **POLS-03**: Anyone can view a party or bloc page showing all linked promises and member politicians
 - [ ] **POLS-04**: Admin can create and edit politician and party profiles
 - [ ] **POLS-05**: Registered user can submit a new or edited politician/party profile (submission enters admin review queue)
 
 ### Elections
 
-- [ ] **ELEC-01**: Anyone can view the elections list page showing all elections with promise counts
-- [ ] **ELEC-02**: Anyone can view an election detail page showing all promises linked to that election across all politicians
+- [x] **ELEC-01**: Anyone can view the elections list page showing all elections with promise counts
+- [x] **ELEC-02**: Anyone can view an election detail page showing all promises linked to that election across all politicians
 - [ ] **ELEC-03**: When submitting a promise, user can link it to one or more elections
 
 ### Discovery & Navigation
@@ -107,13 +107,13 @@ Which phases cover which requirements. Updated during roadmap creation.
 | VOTE-03 | Phase 7 | Pending |
 | VOTE-04 | Phase 7 | Pending |
 | VOTE-05 | Phase 7 | Pending |
-| POLS-01 | Phase 2 | Pending |
-| POLS-02 | Phase 2 | Pending |
-| POLS-03 | Phase 2 | Pending |
+| POLS-01 | Phase 2 | Complete |
+| POLS-02 | Phase 2 | Complete |
+| POLS-03 | Phase 2 | Complete |
 | POLS-04 | Phase 6 | Pending |
 | POLS-05 | Phase 6 | Pending |
-| ELEC-01 | Phase 2 | Pending |
-| ELEC-02 | Phase 2 | Pending |
+| ELEC-01 | Phase 2 | Complete |
+| ELEC-02 | Phase 2 | Complete |
 | ELEC-03 | Phase 5 | Pending |
 | DISC-01 | Phase 3 | Pending |
 | DISC-02 | Phase 3 | Pending |
