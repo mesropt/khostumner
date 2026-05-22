@@ -16,3 +16,4 @@ class Party(Base):
     founded_year: Mapped[int | None] = mapped_column(Integer)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
     notes: Mapped[str | None] = mapped_column(Text)  # "[TEST DATA]" for seed rows
+    slug: Mapped[str] = mapped_column(String(200), unique=True, nullable=False)

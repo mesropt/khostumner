@@ -48,6 +48,7 @@ async def seed(session: AsyncSession) -> None:
         short_name_hy="ՔՊ",
         founded_year=2019,
         notes="[TEST DATA]",
+        slug="qaghaqaciakan-paymanagir",
     )
     armenian_revolutionary = Party(
         id=uuid.uuid4(),
@@ -55,6 +56,7 @@ async def seed(session: AsyncSession) -> None:
         short_name_hy="ՀՅԴ",
         founded_year=1890,
         notes="[TEST DATA]",
+        slug="hay-heghapokhakan-dashnaktsutyun",
     )
     prosperous_armenia = Party(
         id=uuid.uuid4(),
@@ -62,6 +64,7 @@ async def seed(session: AsyncSession) -> None:
         short_name_hy="ԲՀԿ",
         founded_year=2004,
         notes="[TEST DATA]",
+        slug="bargavaj-hayastan",
     )
     republican = Party(
         id=uuid.uuid4(),
@@ -69,6 +72,7 @@ async def seed(session: AsyncSession) -> None:
         short_name_hy="ՀՀԿ",
         founded_year=1990,
         notes="[TEST DATA]",
+        slug="hayastani-hanrapetakan-kusaktsutyun",
     )
     session.add_all([civil_contract, armenian_revolutionary, prosperous_armenia, republican])
     await session.flush()
