@@ -96,8 +96,30 @@ Plans:
   4. "Կատարված" section shows all fulfilled promises, paginated
   5. "Չկատարված" section shows all broken or stalled promises, paginated
   6. Sharing a promise detail URL on social media renders an Open Graph card with title, status, and politician name
-**Plans**: TBD
+**Plans**: 5 plans
 **UI hint**: yes
+
+Plans:
+
+**Wave 1**
+- [ ] 03-01-PLAN.md — Wave 0 scaffolding: PromiseListOut/PromiseDetailOut/StatsOut schemas, RED test stubs (test_promises, test_stats, test_og), shadcn input/separator install, frontend PromiseListOut/PromiseDetailOut/StatsOut/StatsByStatus types
+
+**Wave 2** *(blocked on Wave 1 completion — 03-02 and 03-03 run in parallel)*
+- [ ] 03-02-PLAN.md — Stats slice: GET /api/stats router + useStats hook + HomePage replacement (stats block + recent promises) (DISC-01)
+- [ ] 03-03-PLAN.md — Promises list slice: GET /api/promises router (7 filter params, comma-split status) + PromiseCard + usePromises hook + PromisesListPage + FulfilledPage + UnfulfilledPage (PROM-01, DISC-02, DISC-03)
+
+**Wave 3** *(blocked on Wave 2 completion)*
+- [ ] 03-04-PLAN.md — Promise detail + wiring: GET /api/promises/{slug} detail endpoint + main.py router registration + usePromise hook + PromiseDetailPage + AboutPage + Layout nav update + App.tsx routes (PROM-02)
+
+**Wave 4** *(blocked on Wave 3 completion)*
+- [ ] 03-05-PLAN.md — OG + Nginx: GET /api/og/promises/{slug} HTML endpoint + nginx/nginx.conf bot UA routing + docker-compose.yml nginx service + human verification checkpoint (DISC-05)
+
+**Cross-cutting constraints:**
+- All public promise endpoints MUST filter `moderation_status=approved` — never expose pending/rejected
+- `PromiseListOut` and `PromiseDetailOut` are plain `BaseModel` (no `from_attributes`) — constructed from JOIN Row tuples
+- Comma-separated `?status=broken,stalled` is the multi-value pattern for `/unfulfilled` (D-07b)
+- Null-date promises (`expected_date=null`) MUST NOT be filtered out when no date filter is applied (D-07b)
+- OG bot detection in Nginx/Docker Compose layer only — NOT in FastAPI application code (D-17)
 
 ### Phase 4: Authentication
 **Goal**: Users can create accounts, verify their email, log in with email/password or OAuth, reset forgotten passwords, and stay logged in across browser sessions via JWT.
@@ -173,7 +195,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 |-------|----------------|--------|-----------|
 | 1. Foundation | 2/2 | Complete | 2026-05-21 |
 | 2. Politicians, Parties & Elections Browsing | 4/4 | Complete   | 2026-05-22 |
-| 3. Promise Browsing & Homepage | 0/TBD | Not started | - |
+| 3. Promise Browsing & Homepage | 0/5 | In progress | - |
 | 4. Authentication | 0/TBD | Not started | - |
 | 5. Promise Submission | 0/TBD | Not started | - |
 | 6. Admin Moderation | 0/TBD | Not started | - |
