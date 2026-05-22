@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-01-PLAN.md Wave 0 scaffolding
-last_updated: "2026-05-22T17:48:20.338Z"
-last_activity: 2026-05-22 — Phase 2 execution started
+stopped_at: Completed 02-02-PLAN.md politicians browsing vertical slice
+last_updated: "2026-05-22T18:05:00.000Z"
+last_activity: 2026-05-22 — Phase 2 Plan 02 complete
 progress:
   total_phases: 8
   completed_phases: 1
   total_plans: 6
-  completed_plans: 3
+  completed_plans: 4
   percent: 13
 ---
 
@@ -27,10 +27,10 @@ See: .planning/PROJECT.md (updated 2026-05-20)
 
 Phase: 2 of 8 (Politicians, Parties & Elections Browsing) — **IN PROGRESS**
 Next phase: 3 of 8 (Promise Browsing & Homepage)
-Status: Executing Phase 2 — Wave 1/4 in progress
-Last activity: 2026-05-22 — Phase 2 execution started
+Status: Executing Phase 2 — Plans 01+02 complete, plans 03+04 remaining
+Last activity: 2026-05-22 — Phase 2 Plan 02 complete
 
-Progress: [█████░░░░░] 50%
+Progress: [███████░░░] 67%
 
 ## Performance Metrics
 
@@ -53,6 +53,7 @@ Progress: [█████░░░░░] 50%
 
 *Updated after each plan completion*
 | Phase 02-politicians-parties-elections-browsing P01 | 7 | 3 tasks | 19 files |
+| Phase 02-politicians-parties-elections-browsing P02 | ~25 | 3 tasks | 19 files |
 
 ## Accumulated Context
 
@@ -76,6 +77,10 @@ Recent decisions affecting current work:
 - [Phase ?]: 02-01: Party slug uses explicit ASCII transliterations in migration (no regexp_replace)
 - [Phase ?]: 02-01: frontend/.npmrc sets legacy-peer-deps=true for shadcn CLI compatibility with pre-existing vite version conflict
 - [Phase ?]: 02-01: PaginatedResponse[T] generic schema is the single source of truth for all paginated API responses
+- 02-02: @vitejs/plugin-react pinned to ^4.0.0 — v6 requires vite ^8 which conflicts with project vite ^6
+- 02-02: @testing-library/dom added as explicit dep — missing transitive dep exposed when plugin-react downgraded
+- 02-02: PaginationControls pageParamKey prop allows /persons (?page) and /persons/:slug (?ppage) to coexist
+- 02-02: GET /api/parties/{slug} stub included in plan 02 to satisfy Wave 0 test_parties.py::test_get_party
 
 ### Pending Todos
 
@@ -93,6 +98,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-22T17:48:20.319Z
-Stopped at: Completed 02-01-PLAN.md Wave 0 scaffolding
-Resume at: `/gsd:plan-phase 2` — Phase 2: Politicians, Parties & Elections Browsing
+Last session: 2026-05-22T18:00:27.857Z
+Stopped at: Completed 02-02-PLAN.md politicians browsing vertical slice
+Resume at: Execute 02-03-PLAN.md (parties router) or 02-04-PLAN.md (elections router)
