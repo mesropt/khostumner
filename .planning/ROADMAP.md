@@ -61,8 +61,28 @@ Plans:
   3. Visitor can open a party or bloc page and see linked promises and member politicians
   4. Visitor can open the elections list page and see all elections with their promise counts
   5. Visitor can open an election detail page and see all promises linked to that election across all politicians
-**Plans**: TBD
+**Plans**: 4 plans
 **UI hint**: yes
+
+Plans:
+
+**Wave 1**
+- [ ] 02-01-PLAN.md — Wave 0 scaffolding: Party slug migration, shadcn/ui installs, shared backend schemas (PaginatedResponse, PromiseStubOut), Layout + App.tsx routing, frontend types, Wave 0 test stubs
+
+**Wave 2** *(blocked on Wave 1 completion)*
+- [ ] 02-02-PLAN.md — Politicians browsing slice: PoliticianOut schema + politicians router (list/detail/promises) + PersonsPage + PoliticianProfilePage (POLS-01, POLS-02)
+
+**Wave 3** *(blocked on Wave 2 completion)*
+- [ ] 02-03-PLAN.md — Party page slice: PartyOut schema + expanded parties router (detail/members/promises) + PartyPage (POLS-03)
+
+**Wave 4** *(blocked on Wave 3 completion)*
+- [ ] 02-04-PLAN.md — Elections slice: ElectionOut/ElectionWithCountOut schemas + elections router (list with promise count/detail/promises) + ElectionsListPage + ElectionDetailPage + human verification checkpoint (ELEC-01, ELEC-02)
+
+**Cross-cutting constraints:**
+- All promise queries on public pages MUST filter `moderation_status=approved` — enforced in politicians, parties, elections routers
+- `PaginatedResponse[T]` generic (from `app.schemas.common`) used for ALL list endpoints — no per-entity custom envelopes
+- Party slug field added via Alembic migration in Wave 1 — all party URLs use `/parties/:slug`
+- Page state stored in URL query params via `useSearchParams` — not React `useState`
 
 ### Phase 3: Promise Browsing & Homepage
 **Goal**: Any visitor can see the homepage with overall stats, browse fulfilled and unfulfilled promises, view promise details with sources and status, and share links that render rich Open Graph previews.
@@ -152,7 +172,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 2/2 | Complete | 2026-05-21 |
-| 2. Politicians, Parties & Elections Browsing | 0/TBD | Not started | - |
+| 2. Politicians, Parties & Elections Browsing | 0/4 | Not started | - |
 | 3. Promise Browsing & Homepage | 0/TBD | Not started | - |
 | 4. Authentication | 0/TBD | Not started | - |
 | 5. Promise Submission | 0/TBD | Not started | - |
