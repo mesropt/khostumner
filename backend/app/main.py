@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.database import engine
-from app.routers import health
+from app.routers import health, parties, politicians
 
 
 @asynccontextmanager
@@ -31,3 +31,5 @@ app.add_middleware(
 )
 
 app.include_router(health.router)
+app.include_router(politicians.router, prefix="/api")
+app.include_router(parties.router, prefix="/api")
