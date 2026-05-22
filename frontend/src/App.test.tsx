@@ -27,6 +27,8 @@ describe("App", () => {
 
   it("renders homepage heading", () => {
     renderWithProviders("/")
-    expect(screen.getByText("Խոստումներ")).toBeInTheDocument()
+    // "Խոստումներ" appears in both the nav logo and the page h1
+    const elements = screen.getAllByText("Խոստումներ")
+    expect(elements.length).toBeGreaterThan(0)
   })
 })
