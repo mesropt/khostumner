@@ -39,9 +39,9 @@ export default function PoliticianProfilePage() {
   if (isError || !data) {
     return (
       <main className="max-w-4xl mx-auto px-4 py-8 text-center">
-        <h1 className="text-2xl font-semibold text-zinc-900 mb-4">Պերսոնը չի գտնվել</h1>
+        <h1 className="text-2xl font-semibold text-zinc-900 mb-4">Անձը չի գտնվել</h1>
         <Link to="/persons" className="text-blue-600 underline hover:text-blue-800 text-sm">
-          Վերադառնալ պերսոնների ցուցակ
+          Վերադառնալ անձանց ցուցակ
         </Link>
       </main>
     )

@@ -22,9 +22,7 @@ target_metadata = Base.metadata
 # Override sqlalchemy.url from environment (for Docker / CI)
 db_url = os.getenv("DATABASE_URL", "")
 if db_url:
-    # Alembic needs the sync driver for migrations; swap asyncpg -> psycopg2 (Pitfall 1)
-    sync_url = db_url.replace("postgresql+asyncpg://", "postgresql://")
-    config.set_main_option("sqlalchemy.url", sync_url)
+    config.set_main_option("sqlalchemy.url", db_url)
 
 
 def run_migrations_offline() -> None:

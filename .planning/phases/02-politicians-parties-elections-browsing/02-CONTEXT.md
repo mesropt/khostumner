@@ -18,7 +18,7 @@ No user authentication, no write operations, no promise submission. Promise deta
 ### Site Navigation & Layout
 
 - **D-01:** Phase 2 builds a shared `<Layout>` component that wraps all pages with a persistent site header. All Phase 2 and future browsing pages use this layout.
-- **D-02:** Full planned nav link set is rendered in the header as stubs from day one: logo (Խոստումներ → `/`), Կատարված (`/fulfilled`), Չկատարված (`/unfulfilled`), Պերսոններ (`/persons`), Ընտրություններ (`/elections`). Links for phases not yet built still render — they route to NotFoundPage until those phases deliver the pages.
+- **D-02:** Full planned nav link set is rendered in the header as stubs from day one: logo (Խոստումներ → `/`), Կատարված (`/fulfilled`), Չկատարված (`/unfulfilled`), Անձինք (`/persons`), Ընտրություններ (`/elections`). Links for phases not yet built still render — they route to NotFoundPage until those phases deliver the pages.
 - **D-03:** Logo links to `/` (homepage). No mobile hamburger menu in Phase 2 — mobile nav deferred to Phase 3 when the homepage is built.
 
 ### Persons List (POLS-02)

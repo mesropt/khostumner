@@ -638,7 +638,7 @@ export default function Layout() {
           <Link to="/" className="font-bold text-lg text-gray-900">Խոստումներ</Link>
           <Link to="/fulfilled" className="text-sm text-gray-600 hover:text-gray-900">Կատարված</Link>
           <Link to="/unfulfilled" className="text-sm text-gray-600 hover:text-gray-900">Չկատարված</Link>
-          <Link to="/persons" className="text-sm text-gray-600 hover:text-gray-900">Պերսոններ</Link>
+          <Link to="/persons" className="text-sm text-gray-600 hover:text-gray-900">Անձինք</Link>
           <Link to="/elections" className="text-sm text-gray-600 hover:text-gray-900">Ընտրություններ</Link>
         </nav>
       </header>

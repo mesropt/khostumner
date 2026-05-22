@@ -44,7 +44,7 @@ export default function PartyPage() {
       <main className="max-w-4xl mx-auto px-4 py-8 text-center">
         <h1 className="text-2xl font-semibold text-zinc-900 mb-4">Կուսակցությունը չի գտնվել</h1>
         <Link to="/persons" className="text-blue-600 underline hover:text-blue-800 text-sm">
-          Վերադառնալ պերսոնների ցուցակ
+          Վերադառնալ անձանց ցուցակ
         </Link>
       </main>
     )

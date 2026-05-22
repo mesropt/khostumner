@@ -12,7 +12,7 @@
 ### Locked Decisions
 
 - **D-01:** Phase 2 builds a shared `<Layout>` component that wraps all pages with a persistent site header.
-- **D-02:** Full planned nav link set rendered from day one as stubs: logo (Խոստումներ → `/`), Կատարված (`/fulfilled`), Չկատարված (`/unfulfilled`), Պերսոններ (`/persons`), Ընտրություններ (`/elections`). Links for unbuilt phases route to NotFoundPage.
+- **D-02:** Full planned nav link set rendered from day one as stubs: logo (Խոստումներ → `/`), Կատարված (`/fulfilled`), Չկատարված (`/unfulfilled`), Անձինք (`/persons`), Ընտրություններ (`/elections`). Links for unbuilt phases route to NotFoundPage.
 - **D-03:** Logo links to `/`. No mobile hamburger menu in Phase 2.
 - **D-04:** Filter strategy is **server-side query params** — `?party=<uuid>&level=<national|local|party>`.
 - **D-05:** Filter UI is two `<select>` dropdowns: Party + Level. Both default to "All".
@@ -519,7 +519,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <Link to="/" className="font-bold text-lg text-gray-900">Խոստումներ</Link>
           <Link to="/fulfilled" className="text-sm text-gray-600 hover:text-gray-900">Կատարված</Link>
           <Link to="/unfulfilled" className="text-sm text-gray-600 hover:text-gray-900">Չկատարված</Link>
-          <Link to="/persons" className="text-sm text-gray-600 hover:text-gray-900">Պերսոններ</Link>
+          <Link to="/persons" className="text-sm text-gray-600 hover:text-gray-900">Անձինք</Link>
           <Link to="/elections" className="text-sm text-gray-600 hover:text-gray-900">Ընտրություններ</Link>
         </nav>
       </header>

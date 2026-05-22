@@ -56,7 +56,7 @@ export default function PersonsPage() {
 
   return (
     <main className="max-w-6xl mx-auto px-4 py-8">
-      <h1 className="text-2xl font-semibold text-zinc-900 mb-6">Պերսոններ</h1>
+      <h1 className="text-2xl font-semibold text-zinc-900 mb-6">Անձինք</h1>
 
       {/* Filter row */}
       <div className="flex flex-wrap gap-4 mb-6">
@@ -128,7 +128,7 @@ export default function PersonsPage() {
           {data.items.length === 0 ? (
             <div className="flex flex-col items-center gap-4 py-16 text-center">
               <h2 className="text-lg font-semibold text-zinc-900">
-                Ոչ մի պերսոն չի գտնվել
+                Ոչ մի անձ չի գտնվել
               </h2>
               <p className="text-sm text-zinc-500">
                 Փոխեք ֆիլտրի կարգավորումները...

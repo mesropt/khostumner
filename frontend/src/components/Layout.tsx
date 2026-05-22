@@ -20,7 +20,7 @@ export default function Layout() {
             Չկատարված
           </NavLink>
           <NavLink to="/persons" className={navLinkClass}>
-            Պերսոններ
+            Անձինք
           </NavLink>
           <NavLink to="/elections" className={navLinkClass}>
             Ընտրություններ
