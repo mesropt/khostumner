@@ -572,22 +572,25 @@ async def get_promise(slug: str, db: AsyncSession = Depends(get_db)) -> PromiseD
 
 ---
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Multiple status values: comma-separated vs repeated param**
    - What we know: FastAPI supports both `?status=broken,stalled` (string split in router) and `?status=broken&status=stalled` (List[ResolvedStatus] param type)
    - What's unclear: which pattern the future Phase 5 submission form and Phase 8 search will expect
    - Recommendation: Use comma-separated string for Phase 3 (matches the existing `apiClient.get()` URL construction pattern with `URLSearchParams`); document in API comments for future phases
+   - RESOLVED: Comma-separated `?status=broken,stalled` chosen. Implemented in promises router via `status.split(",")`. Documented in API comments for Phase 5/8 awareness.
 
 2. **OG default image asset**
    - What we know: D-16 specifies fallback to "site default image" when `photo_url` is null
    - What's unclear: no default image asset currently exists in the project
    - Recommendation: Create a minimal `default-og-image.png` (1200x630px) in `frontend/public/` during Phase 3 Wave 0; the OG endpoint references it via the site's canonical URL
+   - RESOLVED: `frontend/public/default-og-image.png` created in 03-05 (OG endpoint plan). OG endpoint falls back to `/default-og-image.png` served from the frontend static root.
 
 3. **Nginx in dev vs production only**
    - What we know: D-17 says Docker Compose / Nginx handles bot routing; the current compose has no Nginx service
    - What's unclear: whether the Nginx sidecar should be dev-only, prod-only, or both
    - Recommendation: Add Nginx to the main `docker-compose.yml` for full parity; use a simple upstream proxy config that also handles the dev Vite server (Vite's `--host 0.0.0.0` already works behind a proxy). Bot UAs rarely hit dev, but the routing config should work in both environments.
+   - RESOLVED: Nginx added to main `docker-compose.yml` (not a separate override). Single config serves both dev and prod; Vite `--host 0.0.0.0` already supports proxy usage.
 
 ---
 
