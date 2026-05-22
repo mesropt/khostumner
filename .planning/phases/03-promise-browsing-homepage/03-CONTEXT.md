@@ -10,7 +10,7 @@ Deliver the promise browsing experience: a real homepage with statistics, a gene
 
 No write operations, no voting, no user authentication. Tags, chronicle, "Верю/Не верю" polling, and politician-initiated promise updates are deferred to later phases.
 
-The nav links Կatarвak (`/fulfilled`) and Չkatarвak (`/unfulfilled`) that currently 404 get real pages in this phase.
+The nav links Կatarвak (`/fulfilled`) and Չkatarвak (`/unfulfilled`) that currently 404 get real pages in this phase. A new nav section **Մեր մասին** (`/about`) is also added — a static informational page.
 
 </domain>
 
@@ -32,6 +32,7 @@ The nav links Կatarвak (`/fulfilled`) and Չkatarвak (`/unfulfilled`) that cu
 - **D-05:** `/fulfilled` and `/unfulfilled` show focused views without the full filter UI — they are clean, titled pages ("Կatarвak" / "Չkatarвak") showing only their relevant promises.
 - **D-06:** `/promises` exposes full filter set: status, politician, election, made_date range (from/to), expected_date range (from/to). All filters are server-side query params, shareable via URL (pattern from Phase 2 D-04).
 - **D-07:** Date filters use from/to date range (two date inputs). Promises without dates (`made_date=null`, `expected_date=null`) are NOT excluded when a date filter is not applied; they simply don't match when a date filter IS applied.
+- **D-07b:** **Бессрочные обещания** (open-ended, no deadline) — `expected_date=null` AND no condition string — are valid and must be handled gracefully throughout: no "срок истёк" logic, no filtering them out of `/unfulfilled` or `/fulfilled` based on date, no "active until date" badge. They simply show without any deadline row on the detail page.
 
 ### Promise List API (PROM-01)
 
@@ -51,6 +52,13 @@ The nav links Կatarвak (`/fulfilled`) and Չkatarвak (`/unfulfilled`) that cu
 - **D-15:** OG tags are served by FastAPI for bot user-agents. Architecture: Nginx (or Docker Compose routing) forwards requests to `/promises/{slug}` from known bot user-agents (Facebookbot, TelegramBot, Twitterbot, LinkedInBot) to a FastAPI endpoint `GET /api/og/promises/{slug}` which returns a minimal HTML page with `<meta og:*>` tags. Regular browser requests continue to the Vite SPA.
 - **D-16:** OG preview content: `og:title` = `title_hy`, `og:description` = first 150 chars of `quote_hy` + " — " + politician `name_hy`, `og:image` = politician `photo_url` (if present; fall back to site default image), `og:url` = canonical promise URL.
 - **D-17:** Bot detection is done in the Docker Compose / reverse-proxy layer by inspecting the `User-Agent` header — NOT in FastAPI application code. FastAPI's `/api/og/promises/{slug}` endpoint is a plain HTML-returning route, called only when the proxy routes to it.
+
+### About Page (Մեր մասին)
+
+- **D-18:** Add nav link **Մեր մասին** to the Layout header, routing to `/about`. Positioned last in the nav.
+- **D-19:** `/about` is a **static page** — no API calls. Content is hardcoded in the React component (no CMS). Written in Armenian (հայերեն).
+- **D-20:** Content covers two topics: (1) the principles by which promises are collected (verbatim quotes required, source links required, moderation process); (2) why this project exists (mission statement). The actual text will be provided by the user before Phase 3 execution — the file `Our Principles` in the project root is the intended source. If content is not ready at planning time, the component renders a placeholder with clear TODO comments.
+- **D-21:** No backend changes needed for `/about`. Frontend-only: new route + new static page component.
 
 ### Claude's Discretion
 
@@ -82,9 +90,9 @@ The nav links Կatarвak (`/fulfilled`) and Չkatarвak (`/unfulfilled`) that cu
 - `backend/app/schemas/common.py` — `PaginatedResponse[T]` generic envelope — MUST be used for all list endpoints
 
 ### Frontend Patterns
-- `frontend/src/App.tsx` — route registry; Phase 3 adds `/`, `/promises`, `/fulfilled`, `/unfulfilled`, `/promises/:slug`
+- `frontend/src/App.tsx` — route registry; Phase 3 adds `/`, `/promises`, `/fulfilled`, `/unfulfilled`, `/promises/:slug`, `/about`
 - `frontend/src/pages/ElectionsListPage.tsx` — template for a clean filtered list page (card layout, loading/error states)
-- `frontend/src/components/Layout.tsx` — existing nav; `/fulfilled` and `/unfulfilled` already linked (currently 404)
+- `frontend/src/components/Layout.tsx` — existing nav; `/fulfilled` and `/unfulfilled` already linked (currently 404); `/about` (Մեր մասին) is a new nav link added in Phase 3
 
 </canonical_refs>
 
@@ -116,6 +124,8 @@ The nav links Կatarвak (`/fulfilled`) and Չkatarвak (`/unfulfilled`) that cu
 - The homepage "last 5–10 promises" should show promises from different politicians — not 10 promises from the same person. Consider `ORDER BY created_at DESC LIMIT 10` which naturally gives recent ones; seed data is diverse enough.
 - OG image falls back to a site default image if `photo_url` is null — define a static default image asset in Phase 3.
 - The "Wayback Machine" fallback link (D-12) uses `archived_url` which the Promise model already has — no schema change needed.
+- **Бессрочные обещания** (D-07b): пример — "Мы реализуем идею подарить каждой семье флаг". Никакого `expected_date`, никакого условия. Отображать без строки срока; фильтры по дате их не задевают.
+- **Файл `Our Principles`** в корне проекта — будущий источник текста для страницы `/about`. Пустой на момент контекста — исполнитель ставит TODO-placeholder и ждёт текста от пользователя перед деплоем.
 
 </specifics>
 
