@@ -73,7 +73,7 @@ Plans:
 - [x] 02-02-PLAN.md — Politicians browsing slice: PoliticianOut schema + politicians router (list/detail/promises) + PersonsPage + PoliticianProfilePage (POLS-01, POLS-02)
 
 **Wave 3** *(blocked on Wave 2 completion)*
-- [ ] 02-03-PLAN.md — Party page slice: PartyOut schema + expanded parties router (detail/members/promises) + PartyPage (POLS-03)
+- [x] 02-03-PLAN.md — Party page slice: PartyOut schema + expanded parties router (detail/members/promises) + PartyPage (POLS-03)
 
 **Wave 4** *(blocked on Wave 3 completion)*
 - [ ] 02-04-PLAN.md — Elections slice: ElectionOut/ElectionWithCountOut schemas + elections router (list with promise count/detail/promises) + ElectionsListPage + ElectionDetailPage + human verification checkpoint (ELEC-01, ELEC-02)
@@ -172,7 +172,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 2/2 | Complete | 2026-05-21 |
-| 2. Politicians, Parties & Elections Browsing | 2/4 | In Progress|  |
+| 2. Politicians, Parties & Elections Browsing | 3/4 | In Progress|  |
 | 3. Promise Browsing & Homepage | 0/TBD | Not started | - |
 | 4. Authentication | 0/TBD | Not started | - |
 | 5. Promise Submission | 0/TBD | Not started | - |
