@@ -715,22 +715,19 @@ class Settings(BaseSettings):
 
 ---
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **Refresh token sliding window behavior**
+1. **Refresh token sliding window behavior** [RESOLVED]
    - What we know: fastapi-users has no built-in rotation; the two-backend pattern issues new access tokens when refresh is valid.
-   - What's unclear: Should the refresh cookie `max_age` be reset on each use (true sliding window) or simply remain a fixed 30-day cookie?
-   - Recommendation: For Phase 4 MVP, use a fixed 30-day refresh cookie (non-sliding). True sliding window requires a refresh token store (Redis) — defer to a later phase if needed.
+   - **Decision:** Use a fixed 30-day refresh cookie (non-sliding) for Phase 4 MVP. True sliding window requires a Redis token store — deferred to a future phase if needed. The custom `/api/auth/refresh` endpoint validates the refresh cookie and issues a new access token cookie without resetting the refresh cookie's expiry.
 
-2. **OAuth dev credentials for Google/Facebook**
+2. **OAuth dev credentials for Google/Facebook** [RESOLVED]
    - What we know: OAuth routes will be wired but require real client IDs/secrets.
-   - What's unclear: Developer will need to create Google Cloud Console + Facebook Developer app projects.
-   - Recommendation: Planner should include a `checkpoint:human-verify` task for OAuth credential creation. Auth flows can be tested with email/password in the meantime.
+   - **Decision:** Include a `checkpoint:human-verify` task (plan 04-06) for OAuth credential creation. Email/password registration, login, and verification are fully testable without OAuth credentials. `test_oauth_google_authorize` is marked `pytest.mark.skipif(not settings.GOOGLE_CLIENT_ID)` so CI passes without credentials.
 
-3. **display_name population for OAuth users**
+3. **display_name population for OAuth users** [RESOLVED]
    - What we know: FastAPI-Users creates the user from the OAuth provider's data (email, account_id). It does NOT automatically set `display_name`.
-   - What's unclear: Should we derive `display_name` from the OAuth profile name, or leave it blank and prompt later?
-   - Recommendation: Override `UserManager.on_after_oauth_register` (or `create_oauth_user`) to set `display_name` from the OAuth provider's name claim if available, else default to the part of the email before `@`.
+   - **Decision:** Override `UserManager.on_after_oauth_register` to set `display_name` from the OAuth provider's name claim if available, else default to the email local part (everything before `@`). This ensures `display_name` is never empty/null (NOT NULL constraint) for OAuth registrations.
 
 ---
 

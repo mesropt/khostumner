@@ -10,7 +10,7 @@
 - [ ] **AUTH-01**: User can register an account with email and password
 - [ ] **AUTH-02**: User receives email verification link after registration
 - [ ] **AUTH-03**: User can reset password via email link
-- [ ] **AUTH-04**: User can log in via Google or GitHub (OAuth)
+- [ ] **AUTH-04**: User can log in via Google or Facebook (OAuth)
 - [ ] **AUTH-05**: Authenticated user session persists across browser refresh (JWT)
 
 ### Promises
