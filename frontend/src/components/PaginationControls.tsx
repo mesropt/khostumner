@@ -20,7 +20,7 @@ export default function PaginationControls({
   totalPages,
   pageParamKey = "page",
 }: PaginationControlsProps) {
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [, setSearchParams] = useSearchParams()
 
   function goToPage(p: number) {
     setSearchParams((prev) => {

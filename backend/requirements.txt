@@ -7,3 +7,9 @@ pydantic==2.13.4
 pydantic-settings
 python-dotenv==1.2.2
 psycopg2-binary==2.9.12
+fastapi-users[sqlalchemy]==15.0.5
+fastapi-mail==1.6.4
+starlette-csrf==3.0.0
+python-multipart==0.0.29
+httpx-oauth==0.17.0
+bcrypt==5.0.0
