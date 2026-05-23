@@ -1,6 +1,6 @@
 # Import all models so Alembic autogenerate sees them all
 from app.models.base import Base  # noqa: F401
-from app.models.users import User, UserRole, OAuthAccount  # noqa: F401
+from app.models.users import User, UserRole  # noqa: F401  # OAuthAccount added in 04-02
 from app.models.parties import Party  # noqa: F401
 from app.models.politicians import Politician, PoliticianPartyMembership, PoliticianLevel  # noqa: F401
 from app.models.elections import Election, ElectionLevel  # noqa: F401
