@@ -130,9 +130,35 @@ Plans:
   1. User can register with email and password and receives a verification email
   2. User can verify their email via the link in the verification email and gain full account access
   3. User can log in with email/password and remain logged in after a browser refresh (JWT persisted)
-  4. User can log in via Google or GitHub OAuth without a separate password
+  4. User can log in via Google or Facebook OAuth without a separate password
   5. User can request a password reset email and set a new password via the link
-**Plans**: TBD
+**Plans**: 6 plans
+
+Plans:
+
+**Wave 1**
+- [ ] 04-01-PLAN.md — [BLOCKING] Alembic auth schema migration (rename password_hash→hashed_password, email_verified→is_verified, add is_superuser, create oauth_accounts table) + install auth packages + RED test stubs (AUTH-01 through AUTH-05)
+
+**Wave 2** *(blocked on Wave 1 completion)*
+- [ ] 04-02-PLAN.md — Backend auth layer: User model update (SQLAlchemyBaseUserTableUUID + OAuthAccount), config.py Phase 4 settings, full auth/ package (backends, schemas, email, users, oauth) (AUTH-01 through AUTH-05)
+
+**Wave 3** *(blocked on Wave 2 completion — 04-03 and 04-04 run in parallel)*
+- [ ] 04-03-PLAN.md — main.py wiring: CSRFMiddleware (after CORS) + all FastAPI-Users routers + custom /auth/refresh endpoint + docker-compose.yml Mailhog service (AUTH-01 through AUTH-05)
+- [ ] 04-04-PLAN.md — Frontend foundation: AuthContext (useReducer rehydration) + useAuth hook + RequireAuth + App.tsx AuthProvider wrapper + Layout.tsx auth nav (AUTH-05)
+
+**Wave 4** *(blocked on Wave 3 completion)*
+- [ ] 04-05-PLAN.md — Auth pages: LoginPage + RegisterPage + VerifyEmailPage + ResetPasswordPage + update test_auth.py stubs to real assertions (AUTH-01, AUTH-02, AUTH-03, AUTH-05)
+
+**Wave 5** *(blocked on Wave 4 completion)*
+- [ ] 04-06-PLAN.md — OAuth credentials: .env.example + human checkpoint for Google/Facebook dev console setup + full test suite gate (AUTH-04)
+
+**Cross-cutting constraints:**
+- CSRFMiddleware registered AFTER CORSMiddleware in main.py (FastAPI reverse order = CSRF inner, CORS outer)
+- All auth fetch calls from frontend include `credentials: "include"` — existing apiClient does not have this
+- `UserCreate` schema extends `BaseUserCreate` with `display_name: str` (required) — prevents NOT NULL violation
+- OAuthAccount.access_token is String(4096) — Google RS256 tokens exceed default 1024-char limit
+- httpOnly JWT cookies: JS never reads token value; auth state rehydrated via GET /api/users/me on mount
+- All UI text in Armenian (հայերեն) — no English labels in auth pages
 
 ### Phase 5: Promise Submission
 **Goal**: Registered and verified users can submit new promises with required fields and source links, submit edits to existing promises, and link promises to elections — all entering an admin review queue.
@@ -196,7 +222,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 | 1. Foundation | 2/2 | Complete | 2026-05-21 |
 | 2. Politicians, Parties & Elections Browsing | 4/4 | Complete   | 2026-05-22 |
 | 3. Promise Browsing & Homepage | 5/5 | Complete | 2026-05-23 |
-| 4. Authentication | 0/TBD | Not started | - |
+| 4. Authentication | 0/6 | Not started | - |
 | 5. Promise Submission | 0/TBD | Not started | - |
 | 6. Admin Moderation | 0/TBD | Not started | - |
 | 7. Community Voting & Status System | 0/TBD | Not started | - |
