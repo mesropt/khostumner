@@ -20,6 +20,13 @@ services:
       retries: 10
     restart: unless-stopped
 
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025"   # SMTP
+      - "8025:8025"   # Web UI
+    restart: unless-stopped
+
   backend:
     build:
       context: ./backend
@@ -36,9 +43,17 @@ services:
       DATABASE_URL: postgresql+asyncpg://khostumner:khostumner@postgres:5432/khostumner
       DB_ECHO: "false"
       ENVIRONMENT: development
+      SMTP_HOST: mailhog
+      SMTP_PORT: "1025"
+      SMTP_FROM: noreply@khostumner.am
+      JWT_SECRET: dev-jwt-secret-change-in-production
+      CSRF_SECRET: dev-csrf-secret-change-in-production
+      FRONTEND_URL: http://localhost:5173
     depends_on:
       postgres:
         condition: service_healthy
+      mailhog:
+        condition: service_started
     restart: on-failure
 
   frontend:
