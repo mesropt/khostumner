@@ -1,10 +1,31 @@
-import { NavLink, Outlet } from "react-router-dom"
+import { NavLink, Outlet, useNavigate } from "react-router-dom"
+import { useAuth } from "@/hooks/useAuth"
+
+const API_BASE = import.meta.env.VITE_API_URL ?? "http://localhost:8000"
 
 export default function Layout() {
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
     isActive
       ? "text-sm font-semibold text-zinc-900"
       : "text-sm text-zinc-600 hover:text-zinc-900"
+
+  const { state, dispatch } = useAuth()
+  const navigate = useNavigate()
+
+  async function handleLogout() {
+    const csrfToken =
+      document.cookie
+        .split("; ")
+        .find((r) => r.startsWith("csrftoken="))
+        ?.split("=")[1] ?? ""
+    await fetch(`${API_BASE}/api/auth/logout`, {
+      method: "POST",
+      credentials: "include",
+      headers: { "x-csrftoken": csrfToken },
+    })
+    dispatch({ type: "CLEAR_USER" })
+    navigate("/")
+  }
 
   return (
     <div className="min-h-screen bg-zinc-50">
@@ -28,6 +49,23 @@ export default function Layout() {
           <NavLink to="/about" className={navLinkClass}>
             Մեր մասին
           </NavLink>
+          <div className="ml-auto flex items-center gap-4">
+            {state.user ? (
+              <>
+                <span className="text-sm text-zinc-600">{state.user.display_name}</span>
+                <button
+                  onClick={handleLogout}
+                  className="text-sm text-zinc-600 hover:text-zinc-900"
+                >
+                  Ելք
+                </button>
+              </>
+            ) : (
+              <NavLink to="/login" className={navLinkClass}>
+                Մուտք
+              </NavLink>
+            )}
+          </div>
         </nav>
       </header>
       <main className="max-w-7xl mx-auto px-4 py-8">
