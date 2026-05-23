@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom"
 import { useStats } from "@/hooks/useStats"
+import { usePromises } from "@/hooks/usePromises"
+import PromiseStub from "@/components/PromiseStub"
 
 // Status labels and semantic text colors per UI-SPEC Copywriting Contract + Status Badge Colors
 const STATUS_CONFIG = [
@@ -12,6 +14,7 @@ const STATUS_CONFIG = [
 
 export default function HomePage() {
   const { data, isLoading, isError } = useStats()
+  const { data: recentData, isLoading: recentLoading } = usePromises({ page: 1, perPage: 10 })
 
   if (isLoading) {
     return (
@@ -79,10 +82,26 @@ export default function HomePage() {
         </Link>
       </div>
 
-      {/* TODO(03-03): replace with usePromises({page:1, perPage:10}) once 03-03 is merged */}
-      <div className="space-y-2">
-        <p className="text-sm text-zinc-500">Խոստումների ցուցակը կցուցադրվի 03-03 փուլից հետո</p>
-      </div>
+      {/* Recent promises list — wired to usePromises (replaces TODO placeholder from 03-02) */}
+      {recentLoading ? (
+        <div className="space-y-2">
+          {Array.from({ length: 10 }).map((_, i) => (
+            <div key={i} className="h-12 bg-zinc-200 rounded animate-pulse" />
+          ))}
+        </div>
+      ) : recentData && recentData.items.length > 0 ? (
+        <div>
+          {recentData.items.map((p) => (
+            <PromiseStub key={p.id} promise={p} />
+          ))}
+        </div>
+      ) : (
+        <p className="text-sm text-zinc-500">Խոստումներ դeռ ավelацвад чen</p>
+      )}
+
+      <Link to="/promises" className="text-sm text-blue-600 underline mt-4 block">
+        Բoлор хostumnernerd →
+      </Link>
     </main>
   )
 }

@@ -25,6 +25,9 @@ export default function Layout() {
           <NavLink to="/elections" className={navLinkClass}>
             Ընտրություններ
           </NavLink>
+          <NavLink to="/about" className={navLinkClass}>
+            Մեր մասին
+          </NavLink>
         </nav>
       </header>
       <main className="max-w-7xl mx-auto px-4 py-8">
