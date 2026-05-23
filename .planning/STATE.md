@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planned
-stopped_at: Phase 3 planning complete — 5 plans ready to execute
+stopped_at: Phase 3 complete — all 5 plans executed and human-verified
 last_updated: "2026-05-23T00:00:00.000Z"
-last_activity: 2026-05-23 — Phase 3 Promise Browsing & Homepage — 5 plans created (03-01 through 03-05)
+last_activity: 2026-05-23 — Phase 3 Promise Browsing & Homepage — all 5 plans complete
 progress:
   total_phases: 8
-  completed_phases: 2
-  total_plans: 6
-  completed_plans: 6
-  percent: 25
+  completed_phases: 3
+  total_plans: 11
+  completed_plans: 11
+  percent: 37
 ---
 
 # Project State
@@ -21,40 +21,39 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-20)
 
 **Core value:** Anyone can verify whether an Armenian politician kept their election promises — with evidence and sources.
-**Current focus:** Phase 2 — Politicians, Parties & Elections Browsing
+**Current focus:** Phase 3 complete — Promise Browsing & Homepage
 
 ## Current Position
 
-Phase: 2 of 8 (Politicians, Parties & Elections Browsing) — **AWAITING CHECKPOINT**
-Next phase: 3 of 8 (Promise Browsing & Homepage)
-Status: All 4 plans complete — awaiting human-verify checkpoint for Phase 2 sign-off
-Last activity: 2026-05-22 — Phase 2 Plan 04 complete
+Phase: 3 of 8 (Promise Browsing & Homepage) — **COMPLETE**
+Next phase: 4 of 8 (Authentication)
+Status: All 5 plans complete — human verification checkpoint approved
+Last activity: 2026-05-23 — Phase 3 all 5 plans done
 
-Progress: [██████████] 100%
+Progress: [███████░░░░░░░] 37%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 2
+- Total plans completed: 11
 - Average duration: ~21 minutes
-- Total execution time: 0.9 hours
+- Total execution time: ~3.5 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 1. Foundation | 2/2 | ~41m | ~21m |
+| 2. Politicians, Parties & Elections | 4/4 | ~1.5h | ~22m |
+| 3. Promise Browsing & Homepage | 5/5 | ~1.5h | ~18m |
 
 **Recent Trend:**
 
-- Last 5 plans: 01-01 (~35m), 01-02 (~6m)
+- Last 5 plans: 03-01 (~4m), 03-02 (~8m), 03-03 (~15m), 03-04 (~21m), 03-05 (~9m)
 - Trend: On track
 
 *Updated after each plan completion*
-| Phase 02-politicians-parties-elections-browsing P01 | 7 | 3 tasks | 19 files |
-| Phase 02-politicians-parties-elections-browsing P02 | ~25 | 3 tasks | 19 files |
-| Phase 02-politicians-parties-elections-browsing P03 | ~4 | 2 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -85,6 +84,13 @@ Recent decisions affecting current work:
 - 02-03: Party promises query uses JOIN approach (Promise JOIN Politician WHERE party_id == party.id) with ModerationStatus.approved filter (T-02-10)
 - 02-04: ElectionWithCountOut is plain BaseModel (no from_attributes) — correlated subquery returns Row tuples; must unpack election_obj and count explicitly in router
 - 02-04: Promise count subquery counts all linked promises (not approved-only); approved filter only applies to /promises endpoint
+- 03-01: PromiseListOut and PromiseDetailOut are plain BaseModel (no from_attributes) — constructed from JOIN Row tuples (per 02-04 pattern)
+- 03-02: Stats GROUP BY query is live at seed-data volume; will migrate to stats_cache in Phase 8
+- 03-03: Comma-separated ?status=broken,stalled is the multi-value pattern; ResolvedStatus(s.strip()) raises 422 for invalid values
+- 03-04: og.py created as minimal stub in 03-04; full OG endpoint implemented in 03-05
+- 03-04: Router import order in main.py is alphabetical: elections, health, og, parties, politicians, promises, stats
+- 03-05: OG bot detection via Nginx set+double-if pattern (avoids map-outside-http context issue in conf.d/default.conf)
+- 03-05: default-og-image.png placeholder created in frontend/public/; replace before production
 
 ### Pending Todos
 
@@ -98,10 +104,11 @@ None yet.
 
 | Category | Item | Status | Deferred At |
 |----------|------|--------|-------------|
-| *(none)* | | | |
+| Content | AboutPage body text — replace TODO placeholder with "Our Principles" content (D-20) | Deferred | 03-04 |
+| Asset | default-og-image.png — replace 1×1 placeholder with real OG image before launch | Deferred | 03-05 |
 
 ## Session Continuity
 
-Last session: 2026-05-22T18:30:00.000Z
-Stopped at: Completed 02-04-PLAN.md elections browsing — human-verify checkpoint pending
-Resume at: After human approves checkpoint — run /gsd:verify-work 2 or proceed to Phase 3
+Last session: 2026-05-23
+Stopped at: Phase 3 complete — all 5 plans executed, human checkpoint approved
+Resume at: /gsd:verify-work 3 (optional), then /gsd:discuss-phase 4 for Authentication

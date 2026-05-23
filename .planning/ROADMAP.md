@@ -16,7 +16,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation** - FastAPI + React/Vite + PostgreSQL scaffold, full DB schema, CI pipeline, seed data loader
 - [x] **Phase 2: Politicians, Parties & Elections Browsing** - Read-only public pages for politicians, parties, and elections (completed 2026-05-22)
-- [ ] **Phase 3: Promise Browsing & Homepage** - Read-only promise list, detail pages, homepage stats, section pages, OG tags
+- [x] **Phase 3: Promise Browsing & Homepage** - Read-only promise list, detail pages, homepage stats, section pages, OG tags (completed 2026-05-23)
 - [ ] **Phase 4: Authentication** - Email/password registration, email verification, password reset, OAuth, persistent JWT sessions
 - [ ] **Phase 5: Promise Submission** - Registered users submit and edit promises; election linking
 - [ ] **Phase 6: Admin Moderation** - Admin manages moderation queue, edit history, and politician/party profiles
@@ -102,17 +102,17 @@ Plans:
 Plans:
 
 **Wave 1**
-- [ ] 03-01-PLAN.md — Wave 0 scaffolding: PromiseListOut/PromiseDetailOut/StatsOut schemas, RED test stubs (test_promises, test_stats, test_og), shadcn input/separator install, frontend PromiseListOut/PromiseDetailOut/StatsOut/StatsByStatus types
+- [x] 03-01-PLAN.md — Wave 0 scaffolding: PromiseListOut/PromiseDetailOut/StatsOut schemas, RED test stubs (test_promises, test_stats, test_og), shadcn input/separator install, frontend PromiseListOut/PromiseDetailOut/StatsOut/StatsByStatus types
 
 **Wave 2** *(blocked on Wave 1 completion — 03-02 and 03-03 run in parallel)*
-- [ ] 03-02-PLAN.md — Stats slice: GET /api/stats router + useStats hook + HomePage replacement (stats block + recent promises) (DISC-01)
-- [ ] 03-03-PLAN.md — Promises list slice: GET /api/promises router (7 filter params, comma-split status) + PromiseCard + usePromises hook + PromisesListPage + FulfilledPage + UnfulfilledPage (PROM-01, DISC-02, DISC-03)
+- [x] 03-02-PLAN.md — Stats slice: GET /api/stats router + useStats hook + HomePage replacement (stats block + recent promises) (DISC-01)
+- [x] 03-03-PLAN.md — Promises list slice: GET /api/promises router (7 filter params, comma-split status) + PromiseCard + usePromises hook + PromisesListPage + FulfilledPage + UnfulfilledPage (PROM-01, DISC-02, DISC-03)
 
 **Wave 3** *(blocked on Wave 2 completion)*
-- [ ] 03-04-PLAN.md — Promise detail + wiring: GET /api/promises/{slug} detail endpoint + main.py router registration + usePromise hook + PromiseDetailPage + AboutPage + Layout nav update + App.tsx routes (PROM-02)
+- [x] 03-04-PLAN.md — Promise detail + wiring: GET /api/promises/{slug} detail endpoint + main.py router registration + usePromise hook + PromiseDetailPage + AboutPage + Layout nav update + App.tsx routes (PROM-02)
 
 **Wave 4** *(blocked on Wave 3 completion)*
-- [ ] 03-05-PLAN.md — OG + Nginx: GET /api/og/promises/{slug} HTML endpoint + nginx/nginx.conf bot UA routing + docker-compose.yml nginx service + human verification checkpoint (DISC-05)
+- [x] 03-05-PLAN.md — OG + Nginx: GET /api/og/promises/{slug} HTML endpoint + nginx/nginx.conf bot UA routing + docker-compose.yml nginx service + human verification checkpoint (DISC-05)
 
 **Cross-cutting constraints:**
 - All public promise endpoints MUST filter `moderation_status=approved` — never expose pending/rejected
@@ -195,7 +195,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 |-------|----------------|--------|-----------|
 | 1. Foundation | 2/2 | Complete | 2026-05-21 |
 | 2. Politicians, Parties & Elections Browsing | 4/4 | Complete   | 2026-05-22 |
-| 3. Promise Browsing & Homepage | 0/5 | In progress | - |
+| 3. Promise Browsing & Homepage | 5/5 | Complete | 2026-05-23 |
 | 4. Authentication | 0/TBD | Not started | - |
 | 5. Promise Submission | 0/TBD | Not started | - |
 | 6. Admin Moderation | 0/TBD | Not started | - |
