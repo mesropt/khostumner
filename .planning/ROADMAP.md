@@ -137,14 +137,14 @@ Plans:
 Plans:
 
 **Wave 1**
-- [ ] 04-01-PLAN.md — [BLOCKING] Alembic auth schema migration (rename password_hash→hashed_password, email_verified→is_verified, add is_superuser, create oauth_accounts table) + install auth packages + RED test stubs (AUTH-01 through AUTH-05)
+- [x] 04-01-PLAN.md — [BLOCKING] Alembic auth schema migration (rename password_hash→hashed_password, email_verified→is_verified, add is_superuser, create oauth_accounts table) + install auth packages + RED test stubs (AUTH-01 through AUTH-05)
 
 **Wave 2** *(blocked on Wave 1 completion)*
-- [ ] 04-02-PLAN.md — Backend auth layer: User model update (SQLAlchemyBaseUserTableUUID + OAuthAccount), config.py Phase 4 settings, full auth/ package (backends, schemas, email, users, oauth) (AUTH-01 through AUTH-05)
+- [x] 04-02-PLAN.md — Backend auth layer: User model update (SQLAlchemyBaseUserTableUUID + OAuthAccount), config.py Phase 4 settings, full auth/ package (backends, schemas, email, users, oauth) (AUTH-01 through AUTH-05)
 
 **Wave 3** *(blocked on Wave 2 completion — 04-03 and 04-04 run in parallel)*
-- [ ] 04-03-PLAN.md — main.py wiring: CSRFMiddleware (after CORS) + all FastAPI-Users routers + custom /auth/refresh endpoint + docker-compose.yml Mailhog service (AUTH-01 through AUTH-05)
-- [ ] 04-04-PLAN.md — Frontend foundation: AuthContext (useReducer rehydration) + useAuth hook + RequireAuth + App.tsx AuthProvider wrapper + Layout.tsx auth nav (AUTH-05)
+- [x] 04-03-PLAN.md — main.py wiring: CSRFMiddleware (after CORS) + all FastAPI-Users routers + custom /auth/refresh endpoint + docker-compose.yml Mailhog service (AUTH-01 through AUTH-05)
+- [x] 04-04-PLAN.md — Frontend foundation: AuthContext (useReducer rehydration) + useAuth hook + RequireAuth + App.tsx AuthProvider wrapper + Layout.tsx auth nav (AUTH-05)
 
 **Wave 4** *(blocked on Wave 3 completion)*
 - [ ] 04-05-PLAN.md — Auth pages: LoginPage + RegisterPage + VerifyEmailPage + ResetPasswordPage + update test_auth.py stubs to real assertions (AUTH-01, AUTH-02, AUTH-03, AUTH-05)
@@ -222,7 +222,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 | 1. Foundation | 2/2 | Complete | 2026-05-21 |
 | 2. Politicians, Parties & Elections Browsing | 4/4 | Complete   | 2026-05-22 |
 | 3. Promise Browsing & Homepage | 5/5 | Complete | 2026-05-23 |
-| 4. Authentication | 0/6 | Planned | - |
+| 4. Authentication | 4/6 | In Progress | - |
 | 5. Promise Submission | 0/TBD | Not started | - |
 | 6. Admin Moderation | 0/TBD | Not started | - |
 | 7. Community Voting & Status System | 0/TBD | Not started | - |
