@@ -6,6 +6,11 @@ from app.auth.users import auth_backend_access, fastapi_users
 router = APIRouter(tags=["auth"])
 
 
+def _only_refresh_backend():
+    """Dependency: restrict authentication to the refresh cookie backend only (CR-01)."""
+    return [auth_backend_refresh]
+
+
 @router.post("/auth/refresh")
 async def refresh_access_token(
     response: Response,
@@ -14,7 +19,7 @@ async def refresh_access_token(
     # httpOnly cookie named `khostumner_refresh`.
     user=Depends(
         fastapi_users.current_user(
-            active=True, get_enabled_backends=[auth_backend_refresh]
+            active=True, get_enabled_backends=_only_refresh_backend
         )
     ),
 ):
