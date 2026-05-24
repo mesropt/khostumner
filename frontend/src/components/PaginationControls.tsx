@@ -32,12 +32,25 @@ export default function PaginationControls({
 
   if (totalPages <= 1) return null
 
-  // Build page numbers to display
+  // Build page numbers to display using a window around the current page so that
+  // no pages are silently unreachable. Pages 1 and totalPages are always shown;
+  // a window of ±1 around currentPage fills the middle (WR-07).
   let pageNumbers: (number | "ellipsis")[]
-  if (totalPages <= 7) {
+  if (totalPages <= 5) {
     pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1)
   } else {
-    pageNumbers = [1, 2, 3, "ellipsis", totalPages - 2, totalPages - 1, totalPages]
+    const near = [currentPage - 1, currentPage, currentPage + 1].filter(
+      (p) => p > 1 && p < totalPages
+    )
+    pageNumbers = [
+      1,
+      ...(near.length > 0 && near[0] > 2 ? (["ellipsis"] as const) : []),
+      ...near,
+      ...(near.length > 0 && near[near.length - 1] < totalPages - 1
+        ? (["ellipsis"] as const)
+        : []),
+      totalPages,
+    ]
   }
 
   return (
