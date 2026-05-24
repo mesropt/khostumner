@@ -62,13 +62,13 @@ Derived from dist CSS and existing page patterns. Source: frontend/dist/assets/i
 | Role | Size | Weight | Line Height | Usage |
 |------|------|--------|-------------|-------|
 | Body | 16px (`text-base`) | 400 (`font-normal`) | 1.5 | Default paragraph text, help text, description fields |
-| Label | 14px (`text-sm`) | 500 (`font-medium`) | 1.43 (default) | Form field labels, nav links, error messages, eligibility gate message |
+| Label | 14px (`text-sm`) | 400 (`font-normal`) | 1.43 (default) | Form field labels, error messages, eligibility gate message |
 | Heading | 24px (`text-2xl`) | 600 (`font-semibold`) | 1.33 (leading-none + tracking-tight) | Card titles (CardTitle pattern: "Ներկայացնել խոստում"), section headings within the form |
 | Display | 18px (`text-lg`) | 600 (`font-semibold`) | 1.56 | Sub-section labels ("Ով", "Ինչ + Երբ") inside the form |
 
 Notes:
 - Only 4 sizes declared above; executor must not introduce additional sizes.
-- Only 2 weights used for form content: 400 (body/inputs) and 600 (headings/labels). `font-medium` (500) is reserved for nav links only (per Layout.tsx established pattern).
+- Only 2 weights used in this phase: 400 (`font-normal`) for body, labels, inputs, and textareas; 600 (`font-semibold`) for headings. (`font-medium` / 500 is an existing Layout.tsx pattern for nav links only — do not touch those nav link styles, and do not add `font-medium` to any Phase 5 element.)
 - All text content is in Armenian (հայերեն) — no English strings in UI elements.
 
 ---
@@ -154,7 +154,7 @@ Status badge colors (established in Phase 3, do not change):
 - No level selected → election list shows instruction text: "Ընտրեք մակարդակ" (14px, zinc-500)
 
 **Form fields (Section 2)**:
-All fields follow Label → Input stacked pattern with `space-y-1.5` between label and input, `space-y-4` between field groups.
+All fields follow Label → Input stacked pattern with `space-y-2` (8px) between label and input, `space-y-4` between field groups.
 
 | Field | Component | Label | Required | Validation |
 |-------|-----------|-------|----------|------------|
@@ -165,7 +165,7 @@ All fields follow Label → Input stacked pattern with `space-y-1.5` between lab
 | Կատարման ամսաթիվ (Expected date) | `Input` type=date | Սպասվող կատարման ամսաթիվ | No | must be after made_date if both set |
 | Նկարագրություն (Description) | `<textarea>` with `Input`-equivalent styling | Նկարագրություն | No | — |
 
-**Textarea styling**: `className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-y"` — mirrors shadcn Input styles with `resize-y` added.
+**Textarea styling**: `className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-y font-normal"` — mirrors shadcn Input styles with `resize-y` added; uses `font-normal` (400) weight.
 
 **Inline field errors**: `<p className="text-sm text-red-600 mt-1">{errorMessage}</p>` — directly below the affected field. Source: LoginPage.tsx pattern.
 
