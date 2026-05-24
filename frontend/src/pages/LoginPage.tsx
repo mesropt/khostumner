@@ -44,12 +44,16 @@ export default function LoginPage() {
       })
 
       if (res.ok) {
-        // Fetch user profile after successful login
-        const me = await fetch(`${API_BASE}/api/users/me`, {
-          credentials: "include",
-        }).then((r) => r.json())
-        dispatch({ type: "SET_USER", payload: me })
-        navigate("/")
+        // Fetch user profile after successful login — check HTTP status before
+        // parsing JSON to avoid dispatching an error body as the user object (WR-04).
+        const meRes = await fetch(`${API_BASE}/api/users/me`, { credentials: "include" })
+        if (meRes.ok) {
+          const me = await meRes.json()
+          dispatch({ type: "SET_USER", payload: me })
+          navigate("/")
+        } else {
+          setError("Մուտքն ի վիճակ չէ հաստատել")
+        }
       } else {
         setError("Սխալ էլ. հասցե կամ գաղտնաբառ")
       }
