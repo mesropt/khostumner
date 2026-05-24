@@ -22,8 +22,8 @@ async def get_user_db(session=Depends(get_async_session)):
 
 
 class UserManager(UUIDIDMixin, BaseUserManager[User, uuid.UUID]):
-    reset_password_token_secret = settings.JWT_SECRET
-    verification_token_secret = settings.JWT_SECRET
+    reset_password_token_secret = settings.RESET_PASSWORD_SECRET
+    verification_token_secret = settings.VERIFICATION_SECRET
 
     async def on_after_register(self, user: User, request=None):
         # If display_name is empty (e.g., after OAuth registration), default to email local part
