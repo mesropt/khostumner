@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: in_progress
-stopped_at: Phase 4 complete — all 6 plans executed — verification pending
+status: planned
+stopped_at: Phase 4 complete — human testing pending (email flows, OAuth), code review fixes applied
 last_updated: "2026-05-24T00:00:00.000Z"
-last_activity: 2026-05-24 — Phase 4 Authentication — all plans complete, verifying
+last_activity: 2026-05-24 — Phase 4 Authentication — execution + review + fixes complete
 progress:
   total_phases: 8
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 17
   completed_plans: 17
   percent: 50
@@ -25,10 +25,10 @@ See: .planning/PROJECT.md (updated 2026-05-20)
 
 ## Current Position
 
-Phase: 4 of 8 (Authentication) — **VERIFYING**
-Next action: Verify Phase 4 goal achievement
-Status: 6/6 plans complete — verification in progress
-Last activity: 2026-05-24 — Phase 4 all plans executed
+Phase: 4 of 8 (Authentication) — **COMPLETE** (human UAT pending)
+Next action: Human test email/OAuth flows, then execute Phase 5
+Status: 6/6 plans complete — code review fixes applied — VERIFICATION.md created
+Last activity: 2026-05-24 — Phase 4 execution + review + fixes + verification complete
 
 Progress: [███████░░░░░░░] 37%
 
@@ -91,6 +91,14 @@ Recent decisions affecting current work:
 - 03-04: Router import order in main.py is alphabetical: elections, health, og, parties, politicians, promises, stats
 - 03-05: OG bot detection via Nginx set+double-if pattern (avoids map-outside-http context issue in conf.d/default.conf)
 - 03-05: default-og-image.png placeholder created in frontend/public/; replace before production
+- 04-01: users table renamed columns hashed_password/is_verified/is_superuser; oauth_accounts table added
+- 04-02: User inherits SQLAlchemyBaseUserTableUUID; OAuthAccount overrides user_id FK to "users.id" (base uses "user.id")
+- 04-03: CSRFMiddleware registered AFTER CORSMiddleware (reverse order = CSRF inner, CORS outer)
+- 04-03: /api/auth/refresh-backend registers separate 30-day cookie backend (not same as access backend)
+- 04-04: AuthContext rehydrates via two-step: GET /me → 401 → POST /refresh → retry /me
+- 04-05: LoginPage uses URLSearchParams (form data) not JSON for /api/auth/login (OAuth2PasswordRequestForm)
+- 04-06: JWT_SECRET, RESET_PASSWORD_SECRET, VERIFICATION_SECRET are separate (no shared secret across token types)
+- 04-06: COOKIE_SECURE=false in docker-compose.yml; true by default in production
 
 ### Pending Todos
 
