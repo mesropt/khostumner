@@ -8,6 +8,7 @@ services:
     environment:
       POSTGRES_DB: khostumner
       POSTGRES_USER: khostumner
+      POSTGRES_PASSWORD: khostumner
       POSTGRES_INITDB_ARGS: "--encoding=UTF8 --lc-collate=C --lc-ctype=C"
     ports:
       - "5433:5432"
@@ -47,7 +48,10 @@ services:
       SMTP_PORT: "1025"
       SMTP_FROM: noreply@khostumner.am
       JWT_SECRET: dev-jwt-secret-change-in-production
+      RESET_PASSWORD_SECRET: dev-reset-secret-change-in-production
+      VERIFICATION_SECRET: dev-verify-secret-change-in-production
       CSRF_SECRET: dev-csrf-secret-change-in-production
+      COOKIE_SECURE: "false"
       FRONTEND_URL: http://localhost:5173
     depends_on:
       postgres:
