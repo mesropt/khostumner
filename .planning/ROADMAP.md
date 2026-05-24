@@ -182,7 +182,7 @@ Plans:
 - [x] 05-03-PLAN.md — Frontend infrastructure: apiClient.post/put + UserRead account_age_days + shadcn components + hooks
 
 **Wave 3 (after Wave 2)**
-- [ ] 05-04-PLAN.md — PromiseSubmitPage (/promises/new) + nav link + success banner + human verification
+- [x] 05-04-PLAN.md — PromiseSubmitPage (/promises/new) + nav link + success banner + human verification
 
 **Wave 4 (after Wave 3)**
 - [ ] 05-05-PLAN.md — PromiseEditPage (/promises/:slug/edit) + edit link on PromiseDetailPage + human verification
@@ -244,7 +244,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 | 2. Politicians, Parties & Elections Browsing | 4/4 | Complete   | 2026-05-22 |
 | 3. Promise Browsing & Homepage | 5/5 | Complete | 2026-05-23 |
 | 4. Authentication | 6/6 | Complete | 2026-05-24 |
-| 5. Promise Submission | 3/5 | In Progress|  |
+| 5. Promise Submission | 4/5 | In Progress|  |
 | 6. Admin Moderation | 0/TBD | Not started | - |
 | 7. Community Voting & Status System | 0/TBD | Not started | - |
 | 8. Search & Statistics | 0/TBD | Not started | - |
