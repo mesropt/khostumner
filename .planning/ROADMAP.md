@@ -147,10 +147,10 @@ Plans:
 - [x] 04-04-PLAN.md — Frontend foundation: AuthContext (useReducer rehydration) + useAuth hook + RequireAuth + App.tsx AuthProvider wrapper + Layout.tsx auth nav (AUTH-05)
 
 **Wave 4** *(blocked on Wave 3 completion)*
-- [ ] 04-05-PLAN.md — Auth pages: LoginPage + RegisterPage + VerifyEmailPage + ResetPasswordPage + update test_auth.py stubs to real assertions (AUTH-01, AUTH-02, AUTH-03, AUTH-05)
+- [x] 04-05-PLAN.md — Auth pages: LoginPage + RegisterPage + VerifyEmailPage + ResetPasswordPage + update test_auth.py stubs to real assertions (AUTH-01, AUTH-02, AUTH-03, AUTH-05)
 
 **Wave 5** *(blocked on Wave 4 completion)*
-- [ ] 04-06-PLAN.md — OAuth credentials: .env.example + human checkpoint for Google/Facebook dev console setup + full test suite gate (AUTH-04)
+- [x] 04-06-PLAN.md — OAuth credentials: .env.example + human checkpoint for Google/Facebook dev console setup + full test suite gate (AUTH-04)
 
 **Cross-cutting constraints:**
 - CSRFMiddleware registered AFTER CORSMiddleware in main.py (FastAPI reverse order = CSRF inner, CORS outer)
@@ -222,7 +222,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 | 1. Foundation | 2/2 | Complete | 2026-05-21 |
 | 2. Politicians, Parties & Elections Browsing | 4/4 | Complete   | 2026-05-22 |
 | 3. Promise Browsing & Homepage | 5/5 | Complete | 2026-05-23 |
-| 4. Authentication | 4/6 | In Progress | - |
+| 4. Authentication | 6/6 | Complete | 2026-05-24 |
 | 5. Promise Submission | 0/TBD | Not started | - |
 | 6. Admin Moderation | 0/TBD | Not started | - |
 | 7. Community Voting & Status System | 0/TBD | Not started | - |
