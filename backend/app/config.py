@@ -8,7 +8,12 @@ class Settings(BaseSettings):
 
     # Phase 4: Auth
     JWT_SECRET: str = "change-me-in-production"
+    RESET_PASSWORD_SECRET: str = "change-me-reset-in-production"
+    VERIFICATION_SECRET: str = "change-me-verify-in-production"
     CSRF_SECRET: str = "change-me-in-production-csrf"
+    # Set to False only for local dev via .env; defaults to True for security
+    COOKIE_SECURE: bool = True
+    ALLOWED_ORIGINS: list[str] = ["http://localhost:5173"]
     SMTP_HOST: str = "mailhog"
     SMTP_PORT: int = 1025
     SMTP_USERNAME: str = ""

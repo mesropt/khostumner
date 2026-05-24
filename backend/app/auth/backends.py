@@ -6,7 +6,7 @@ cookie_transport_access = CookieTransport(
     cookie_name="khostumner_access",
     cookie_max_age=3600,
     cookie_httponly=True,
-    cookie_secure=False,  # True in production
+    cookie_secure=settings.COOKIE_SECURE,
     cookie_samesite="lax",
 )
 
@@ -14,7 +14,7 @@ cookie_transport_refresh = CookieTransport(
     cookie_name="khostumner_refresh",
     cookie_max_age=2592000,  # 60*60*24*30 = 30 days
     cookie_httponly=True,
-    cookie_secure=False,  # True in production
+    cookie_secure=settings.COOKIE_SECURE,
     cookie_samesite="lax",
 )
 
