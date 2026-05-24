@@ -46,6 +46,9 @@ export default function Layout() {
           <NavLink to="/elections" className={navLinkClass}>
             Ընտրություններ
           </NavLink>
+          <NavLink to="/promises/new" className={navLinkClass}>
+            Ներկայացնել
+          </NavLink>
           <NavLink to="/about" className={navLinkClass}>
             Մեր մասին
           </NavLink>
