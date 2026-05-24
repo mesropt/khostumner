@@ -170,7 +170,28 @@ Plans:
   2. Submitted promise appears in the admin moderation queue rather than going live immediately
   3. Logged-in user can submit an edit to an existing promise that enters the admin review queue
   4. When submitting a promise, user can link it to one or more elections from a picker
-**Plans**: TBD
+**Plans**: 5 plans
+
+Plans:
+
+**Wave 1 (blocking)**
+- [ ] 05-01-PLAN.md — Wave 0 scaffold: promise_edits migration + ORM models + Pydantic schemas + npm/pip deps + RED test stubs
+
+**Wave 2 (parallel after Wave 1)**
+- [ ] 05-02-PLAN.md — Backend endpoints: POST /api/promises + PUT /api/promises/{slug} + account_age_days in UserRead
+- [ ] 05-03-PLAN.md — Frontend infrastructure: apiClient.post/put + UserRead account_age_days + shadcn components + hooks
+
+**Wave 3 (after Wave 2)**
+- [ ] 05-04-PLAN.md — PromiseSubmitPage (/promises/new) + nav link + success banner + human verification
+
+**Wave 4 (after Wave 3)**
+- [ ] 05-05-PLAN.md — PromiseEditPage (/promises/:slug/edit) + edit link on PromiseDetailPage + human verification
+
+**Cross-cutting constraints:**
+- moderation_status SAEnum reuse: promise_edits migration uses sa.Enum(create_type=False); ORM imports from app.models.promises
+- account_age_days is login-snapshot (not real-time) — accepted v1 limitation
+- PUT /api/promises/{slug} looks up any non-rejected promise (not approved-only)
+- promise_edits rows are append-only — never DELETE or UPDATE in Phase 5
 **UI hint**: yes
 
 ### Phase 6: Admin Moderation
@@ -223,7 +244,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 | 2. Politicians, Parties & Elections Browsing | 4/4 | Complete   | 2026-05-22 |
 | 3. Promise Browsing & Homepage | 5/5 | Complete | 2026-05-23 |
 | 4. Authentication | 6/6 | Complete | 2026-05-24 |
-| 5. Promise Submission | 0/TBD | Not started | - |
+| 5. Promise Submission | 0/5 | Not started | - |
 | 6. Admin Moderation | 0/TBD | Not started | - |
 | 7. Community Voting & Status System | 0/TBD | Not started | - |
 | 8. Search & Statistics | 0/TBD | Not started | - |
