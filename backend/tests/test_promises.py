@@ -1,6 +1,7 @@
-"""Tests for PROM-01 (promise list) and PROM-02 (promise detail).
+"""Tests for PROM-01/02 (promise list/detail) and PROM-03/04/ELEC-03 (submission).
 
-RED state — promises router not yet wired in 03-01.
+Phase 3 tests: previously RED state, now GREEN (promises router wired).
+Phase 5 stubs: RED state — POST/PUT endpoints not yet implemented.
 """
 
 import pytest
@@ -67,3 +68,76 @@ async def test_get_promise(client):
     assert "quote_hy" in body
     assert "politician_name_hy" in body
     assert "politician_slug" in body
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Phase 5 RED-state stubs — PROM-03, PROM-04, ELEC-03
+# These fail until Wave 1 implements POST /api/promises and PUT /api/promises/{slug}
+# ──────────────────────────────────────────────────────────────────────────────
+
+
+@pytest.mark.asyncio
+async def test_create_promise(client):
+    """PROM-03: POST /api/promises returns 201 for eligible authenticated user.
+
+    RED — POST /api/promises not yet implemented (Wave 1).
+    verified_user_client fixture added in Wave 1 conftest.
+    """
+    pytest.skip("RED — POST /api/promises not yet implemented (Wave 1)")
+
+
+@pytest.mark.asyncio
+async def test_create_promise_unauthenticated(client):
+    """PROM-03: POST /api/promises returns 401 for unauthenticated request."""
+    pytest.skip("RED — POST /api/promises not yet implemented (Wave 1)")
+
+
+@pytest.mark.asyncio
+async def test_create_promise_unverified(client):
+    """PROM-03: POST /api/promises returns 403 for unverified user.
+
+    RED — unverified_user_client fixture added in Wave 1 conftest.
+    """
+    pytest.skip("RED — POST /api/promises not yet implemented (Wave 1)")
+
+
+@pytest.mark.asyncio
+async def test_create_promise_too_young(client):
+    """PROM-03: POST /api/promises returns 403 for account < 7 days old.
+
+    RED — young_user_client fixture added in Wave 1 conftest.
+    """
+    pytest.skip("RED — POST /api/promises not yet implemented (Wave 1)")
+
+
+@pytest.mark.asyncio
+async def test_create_promise_invalid_election(client):
+    """PROM-03/ELEC-03: POST /api/promises with non-existent election_id returns 422.
+
+    RED — verified_user_client fixture added in Wave 1 conftest.
+    """
+    pytest.skip("RED — POST /api/promises not yet implemented (Wave 1)")
+
+
+@pytest.mark.asyncio
+async def test_create_promise_with_elections(client):
+    """ELEC-03: POST /api/promises with election_ids creates PromiseElectionLink rows.
+
+    RED — verified_user_client fixture added in Wave 1 conftest.
+    """
+    pytest.skip("RED — POST /api/promises not yet implemented (Wave 1)")
+
+
+@pytest.mark.asyncio
+async def test_edit_promise_creates_edit_row(client):
+    """PROM-04: PUT /api/promises/{slug} inserts into promise_edits, not the live promise.
+
+    RED — verified_user_client fixture added in Wave 1 conftest.
+    """
+    pytest.skip("RED — PUT /api/promises/{slug} not yet implemented (Wave 1)")
+
+
+@pytest.mark.asyncio
+async def test_edit_promise_unauthenticated(client):
+    """PROM-04: PUT /api/promises/{slug} returns 401 for unauthenticated request."""
+    pytest.skip("RED — PUT /api/promises/{slug} not yet implemented (Wave 1)")
