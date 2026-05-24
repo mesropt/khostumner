@@ -3,7 +3,6 @@ import uuid
 from fastapi import Depends
 from fastapi_users import BaseUserManager, FastAPIUsers, UUIDIDMixin
 from fastapi_users.db import SQLAlchemyUserDatabase
-from sqlalchemy import update
 
 from app.auth.backends import auth_backend_access, auth_backend_refresh
 from app.auth.email import send_password_reset_email, send_verification_email
@@ -26,15 +25,12 @@ class UserManager(UUIDIDMixin, BaseUserManager[User, uuid.UUID]):
     verification_token_secret = settings.VERIFICATION_SECRET
 
     async def on_after_register(self, user: User, request=None):
-        # If display_name is empty (e.g., after OAuth registration), default to email local part
+        # If display_name is empty (e.g., after OAuth registration), default to email local part.
+        # Use the injected user_db — do NOT open a second independent session, which would
+        # UPDATE on a separate transaction and risk finding no row if the INSERT is not yet
+        # visible (CR-07).
         if not user.display_name:
-            async with AsyncSessionLocal() as session:
-                await session.execute(
-                    update(User)
-                    .where(User.id == user.id)
-                    .values(display_name=user.email.split("@")[0])
-                )
-                await session.commit()
+            await self.user_db.update(user, {"display_name": user.email.split("@")[0]})
 
     async def on_after_forgot_password(self, user: User, token: str, request=None):
         await send_password_reset_email(user.email, token)
