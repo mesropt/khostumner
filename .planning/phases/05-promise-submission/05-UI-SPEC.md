@@ -1,7 +1,8 @@
 ---
 phase: 5
 slug: promise-submission
-status: draft
+status: approved
+reviewed_at: 2026-05-24
 shadcn_initialized: true
 preset: "style=default baseColor=zinc cssVariables=true"
 created: 2026-05-24
