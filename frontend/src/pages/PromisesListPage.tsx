@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import { AlertCircle } from "lucide-react"
 import {
@@ -24,6 +25,7 @@ const STATUS_OPTIONS = [
 
 export default function PromisesListPage() {
   const [searchParams, setSearchParams] = useSearchParams()
+  const [showBanner, setShowBanner] = useState(searchParams.get("submitted") === "1")
 
   const page = parseInt(searchParams.get("page") ?? "1", 10) || 1
   const status = searchParams.get("status") || null
@@ -102,6 +104,20 @@ export default function PromisesListPage() {
   return (
     <main className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="text-2xl font-semibold text-zinc-900 mb-6">Բոլոր խոստումները</h1>
+
+      {/* Success banner — shown when redirected from /promises/new after submission */}
+      {showBanner && (
+        <div className="bg-green-100 border border-green-200 text-green-800 text-sm px-4 py-3 rounded-md mb-6 flex justify-between items-center">
+          <span>Ձեր խոստումը ներկայացված է: Այն կհրապարակվի ստուգումից հետո</span>
+          <button
+            onClick={() => setShowBanner(false)}
+            className="text-green-800 font-semibold ml-4"
+            aria-label="Փակել"
+          >
+            ✕
+          </button>
+        </div>
+      )}
 
       {/* Filter row */}
       <div className="flex flex-wrap gap-4 mb-6">
