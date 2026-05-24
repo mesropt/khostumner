@@ -18,6 +18,7 @@ import VerifyEmailPage from "@/pages/VerifyEmailPage"
 import ResetPasswordPage from "@/pages/ResetPasswordPage"
 import { AuthProvider } from "@/contexts/AuthContext"
 import RequireAuth from "@/components/RequireAuth"
+import PromiseSubmitPage from "@/pages/PromiseSubmitPage"
 
 export default function App() {
   return (
@@ -40,7 +41,7 @@ export default function App() {
           <Route path="/verify-email" element={<VerifyEmailPage />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route element={<RequireAuth />}>
-            {/* Protected routes — Phase 5+ adds children here */}
+            <Route path="/promises/new" element={<PromiseSubmitPage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Route>
