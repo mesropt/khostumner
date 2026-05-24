@@ -8,6 +8,7 @@ from app.models.users import UserRole
 class UserRead(schemas.BaseUser[uuid.UUID]):
     display_name: str
     role: str  # UserRole enum serialized as string
+    account_age_days: int = 0  # cached; recomputed on login (WR-06)
 
 
 class UserCreate(schemas.BaseUserCreate):
