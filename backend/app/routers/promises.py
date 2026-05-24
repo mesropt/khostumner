@@ -173,17 +173,24 @@ async def create_promise(
 ) -> PromiseOut:
     """Create a new promise.
 
-    Eligibility: authenticated + email verified (fastapi_users enforces) + account_age_days >= 7.
+    Eligibility: authenticated + email verified (fastapi_users enforces) + account_age >= 7 days.
     New promise always starts with moderation_status=pending (T-05-03).
     Slug auto-generated from title_hy via python-slugify (T-05-02).
     Election IDs validated before insert (T-05-04).
     """
-    # D-01: Account must be at least 7 days old (manual check — fastapi_users only does active+verified)
-    if user.account_age_days < 7:
+    # D-01: Account must be at least 7 days old — computed from created_at, not cached column
+    if (datetime.now(timezone.utc) - user.created_at).days < 7:
         raise HTTPException(
             status_code=403,
             detail="Account must be at least 7 days old to submit promises",
         )
+
+    # CR-01: Validate politician_id exists — FK violation would otherwise produce 500
+    pol_check = await db.execute(
+        select(Politician.id).where(Politician.id == payload.politician_id).limit(1)
+    )
+    if pol_check.scalar_one_or_none() is None:
+        raise HTTPException(status_code=422, detail="Politician not found")
 
     # T-05-04: Validate all election_ids exist in elections table
     if payload.election_ids:
@@ -240,11 +247,24 @@ async def create_promise(
     try:
         await db.commit()
     except IntegrityError:
-        # Safety net: slug collision race (extremely rare) — retry with new suffix
+        # CR-04: After rollback the session is clean — reconstruct from scratch with new slug
         await db.rollback()
         slug = f"{base_slug}-{_uuid.uuid4().hex[:6]}"
-        promise.slug = slug
+        promise = Promise(
+            title_hy=payload.title_hy,
+            quote_hy=payload.quote_hy,
+            description_hy=payload.description_hy,
+            politician_id=payload.politician_id,
+            made_date=payload.made_date,
+            expected_date=payload.expected_date,
+            source_url=payload.source_url,
+            slug=slug,
+            moderation_status=ModerationStatus.pending,
+            created_by=user.id,
+            created_at=datetime.now(timezone.utc),
+        )
         db.add(promise)
+        await db.flush()
         for election_id in payload.election_ids:
             link = PromiseElectionLink(
                 promise_id=promise.id,
@@ -277,8 +297,8 @@ async def edit_promise(
     Eligibility: same as create (D-07).
     Lookup: finds pending AND approved promises; rejected → 404 (RESEARCH Pitfall 4).
     """
-    # D-07: Same eligibility as new submission
-    if user.account_age_days < 7:
+    # D-07: Same eligibility as new submission — computed from created_at, not cached column
+    if (datetime.now(timezone.utc) - user.created_at).days < 7:
         raise HTTPException(
             status_code=403,
             detail="Account must be at least 7 days old to submit promise edits",

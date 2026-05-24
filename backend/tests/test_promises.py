@@ -5,6 +5,7 @@ Phase 5 stubs: RED state — POST/PUT endpoints not yet implemented.
 """
 
 import uuid
+from datetime import datetime, timedelta, timezone
 
 import pytest
 from httpx import ASGITransport, AsyncClient
@@ -50,7 +51,7 @@ async def verified_user_client(client):
         user = result.scalar_one_or_none()
         if user is not None:
             user.is_verified = True
-            user.account_age_days = 10
+            user.created_at = datetime.now(timezone.utc) - timedelta(days=10)
             await session.commit()
     await test_engine.dispose()
 
@@ -105,7 +106,7 @@ async def young_user_client(client):
         user = result.scalar_one_or_none()
         if user is not None:
             user.is_verified = True
-            user.account_age_days = 0
+            user.created_at = datetime.now(timezone.utc)
             await session.commit()
     await test_engine.dispose()
 
@@ -201,13 +202,38 @@ async def test_get_promise(client):
 
 
 @pytest.mark.asyncio
-async def test_create_promise(client):
-    """PROM-03: POST /api/promises returns 201 for eligible authenticated user.
+async def test_create_promise(verified_user_client):
+    """PROM-03: POST /api/promises returns 201 for eligible authenticated user."""
+    from sqlalchemy import select
+    from app.models.politicians import Politician
 
-    RED — POST /api/promises not yet implemented (Wave 1).
-    verified_user_client fixture added in Wave 1 conftest.
-    """
-    pytest.skip("RED — verified_user_client fixture needed for full test")
+    test_engine = create_async_engine(settings.DATABASE_URL, echo=False)
+    test_session_factory = async_sessionmaker(bind=test_engine, expire_on_commit=False, autoflush=False)
+    politician_id = None
+    async with test_session_factory() as session:
+        result = await session.execute(select(Politician).limit(1))
+        pol = result.scalar_one_or_none()
+        if pol:
+            politician_id = str(pol.id)
+    await test_engine.dispose()
+
+    if not politician_id:
+        pytest.skip("No politicians in database — seed data required")
+
+    response = await verified_user_client.post(
+        "/api/promises",
+        json={
+            "title_hy": "Թեստային Խոստում",
+            "quote_hy": "Ես խոստանում եմ բարեփոխել համակարգը",
+            "source_url": "https://example.com/source",
+            "politician_id": politician_id,
+            "election_ids": [],
+        },
+    )
+    assert response.status_code == 201
+    body = response.json()
+    assert "slug" in body
+    assert body["moderation_status"] == "pending"
 
 
 @pytest.mark.asyncio
@@ -274,30 +300,104 @@ async def test_create_promise_too_young(young_user_client):
 
 
 @pytest.mark.asyncio
-async def test_create_promise_invalid_election(client):
-    """PROM-03/ELEC-03: POST /api/promises with non-existent election_id returns 422.
+async def test_create_promise_invalid_election(verified_user_client):
+    """PROM-03/ELEC-03: POST /api/promises with non-existent election_id returns 422."""
+    from sqlalchemy import select
+    from app.models.politicians import Politician
 
-    RED — verified_user_client fixture added in Wave 1 conftest.
-    """
-    pytest.skip("RED — verified_user_client fixture needed for full test")
+    test_engine = create_async_engine(settings.DATABASE_URL, echo=False)
+    test_session_factory = async_sessionmaker(bind=test_engine, expire_on_commit=False, autoflush=False)
+    politician_id = None
+    async with test_session_factory() as session:
+        result = await session.execute(select(Politician).limit(1))
+        pol = result.scalar_one_or_none()
+        if pol:
+            politician_id = str(pol.id)
+    await test_engine.dispose()
+
+    if not politician_id:
+        pytest.skip("No politicians in database — seed data required")
+
+    response = await verified_user_client.post(
+        "/api/promises",
+        json={
+            "title_hy": "Թեստային Խոստում",
+            "quote_hy": "Ես խոստանում եմ բարեփոխել համակարգը",
+            "source_url": "https://example.com/source",
+            "politician_id": politician_id,
+            "election_ids": [str(uuid.uuid4())],
+        },
+    )
+    assert response.status_code == 422
 
 
 @pytest.mark.asyncio
-async def test_create_promise_with_elections(client):
-    """ELEC-03: POST /api/promises with election_ids creates PromiseElectionLink rows.
+async def test_create_promise_with_elections(verified_user_client):
+    """ELEC-03: POST /api/promises with election_ids creates PromiseElectionLink rows."""
+    from sqlalchemy import select
+    from app.models.politicians import Politician
+    from app.models.elections import Election
 
-    RED — verified_user_client fixture added in Wave 1 conftest.
-    """
-    pytest.skip("RED — verified_user_client fixture needed for full test")
+    test_engine = create_async_engine(settings.DATABASE_URL, echo=False)
+    test_session_factory = async_sessionmaker(bind=test_engine, expire_on_commit=False, autoflush=False)
+    politician_id = None
+    election_id = None
+    async with test_session_factory() as session:
+        result = await session.execute(select(Politician).limit(1))
+        pol = result.scalar_one_or_none()
+        if pol:
+            politician_id = str(pol.id)
+        elec_result = await session.execute(select(Election).limit(1))
+        elec = elec_result.scalar_one_or_none()
+        if elec:
+            election_id = str(elec.id)
+    await test_engine.dispose()
+
+    if not politician_id or not election_id:
+        pytest.skip("No politicians or elections in database — seed data required")
+
+    response = await verified_user_client.post(
+        "/api/promises",
+        json={
+            "title_hy": "Ընտրական Խոստում",
+            "quote_hy": "Ես խոստանում եմ բարեփոխել ընտրական համակարգը",
+            "source_url": "https://example.com/election-source",
+            "politician_id": politician_id,
+            "election_ids": [election_id],
+        },
+    )
+    assert response.status_code == 201
+    body = response.json()
+    assert body["moderation_status"] == "pending"
 
 
 @pytest.mark.asyncio
-async def test_edit_promise_creates_edit_row(client):
-    """PROM-04: PUT /api/promises/{slug} inserts into promise_edits, not the live promise.
+async def test_edit_promise_creates_edit_row(verified_user_client):
+    """PROM-04: PUT /api/promises/{slug} inserts into promise_edits, not the live promise."""
+    from sqlalchemy import select
+    from app.models.promise_edits import PromiseEdit
 
-    RED — verified_user_client fixture added in Wave 1 conftest.
-    """
-    pytest.skip("RED — verified_user_client fixture needed for full test")
+    # Fetch an approved promise slug from the list
+    list_response = await verified_user_client.get("/api/promises")
+    assert list_response.status_code == 200
+    items = list_response.json()["items"]
+    if not items:
+        pytest.skip("No approved promises in database — seed data required")
+
+    slug = items[0]["slug"]
+    response = await verified_user_client.put(
+        f"/api/promises/{slug}",
+        json={
+            "title_hy": "Խմբագրված Խոստում",
+            "quote_hy": "Ես խոստանում եմ ևս մեկ անգամ",
+            "source_url": "https://example.com/edit-source",
+            "election_ids": [],
+        },
+    )
+    assert response.status_code == 201
+    body = response.json()
+    assert body["moderation_status"] == "pending"
+    assert "promise_id" in body
 
 
 @pytest.mark.asyncio

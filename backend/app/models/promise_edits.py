@@ -36,7 +36,7 @@ class PromiseEdit(Base):
         ForeignKey("users.id", ondelete="SET NULL"), nullable=True
     )
     moderation_status: Mapped[ModerationStatus] = mapped_column(
-        SAEnum(ModerationStatus, name="moderation_status"),
+        SAEnum(ModerationStatus, name="moderation_status", create_type=False),
         default=ModerationStatus.pending,
         nullable=False,
     )

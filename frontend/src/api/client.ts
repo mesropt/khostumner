@@ -11,7 +11,7 @@ export function getCsrfToken(): string {
 
 const apiClient = {
   async get<T>(path: string): Promise<T> {
-    const response = await fetch(API_BASE + path)
+    const response = await fetch(API_BASE + path, { credentials: "include" })
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`)
     }
