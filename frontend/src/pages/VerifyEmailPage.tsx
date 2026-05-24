@@ -17,9 +17,9 @@ export default function VerifyEmailPage() {
   const [searchParams] = useSearchParams()
   const [status, setStatus] = useState<"loading" | "success" | "error">("loading")
 
-  useEffect(() => {
-    const token = searchParams.get("token")
+  const token = searchParams.get("token")
 
+  useEffect(() => {
     if (!token) {
       setStatus("error")
       return
@@ -44,7 +44,7 @@ export default function VerifyEmailPage() {
       .catch(() => {
         setStatus("error")
       })
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [token])
 
   return (
     <main className="max-w-md mx-auto px-4 py-16">
