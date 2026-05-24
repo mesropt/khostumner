@@ -1,4 +1,5 @@
 import uuid
+from datetime import datetime, timezone
 
 from fastapi import Depends
 from fastapi_users import BaseUserManager, FastAPIUsers, UUIDIDMixin
@@ -31,6 +32,12 @@ class UserManager(UUIDIDMixin, BaseUserManager[User, uuid.UUID]):
         # visible (CR-07).
         if not user.display_name:
             await self.user_db.update(user, {"display_name": user.email.split("@")[0]})
+
+    async def on_after_login(self, user: User, request=None, response=None):
+        # Recompute and persist account_age_days on every login so Phase 7 vote
+        # eligibility checks read a fresh value rather than always seeing 0 (WR-06).
+        age = (datetime.now(timezone.utc) - user.created_at).days
+        await self.user_db.update(user, {"account_age_days": age})
 
     async def on_after_forgot_password(self, user: User, token: str, request=None):
         await send_password_reset_email(user.email, token)
