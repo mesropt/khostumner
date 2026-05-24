@@ -3,10 +3,12 @@ import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import ResolvedStatusBadge from "@/components/ResolvedStatusBadge"
 import { usePromise } from "@/hooks/usePromise"
+import { useAuth } from "@/hooks/useAuth"
 
 export default function PromiseDetailPage() {
   const { slug } = useParams<{ slug: string }>()
   const { data, isLoading, isError } = usePromise(slug!)
+  const { state } = useAuth()
 
   // Loading skeleton — animate-pulse per UI-SPEC
   if (isLoading) {
@@ -100,6 +102,16 @@ export default function PromiseDetailPage() {
           </a>
         )}
       </div>
+
+      {/* Edit link — visible only for authenticated users (T-05-16) */}
+      {state.user && (
+        <Link
+          to={`/promises/${data.slug}/edit`}
+          className="text-sm text-blue-600 underline mt-4 inline-block"
+        >
+          Խմբագրել
+        </Link>
+      )}
     </main>
   )
 }
