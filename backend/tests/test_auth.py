@@ -27,12 +27,31 @@ from app.main import app
 
 @pytest.fixture
 async def client():
-    """ASGI test client with CSRF cookie pre-seeded.
+    """ASGI test client with CSRF cookie pre-seeded and per-test DB isolation.
 
     starlette-csrf sets csrftoken cookie on GET requests and validates the
     matching x-csrftoken header on POST requests. The GET /health call seeds
     the cookie; tests must pass the cookie value as x-csrftoken header.
+
+    DB isolation: truncates users/oauth_accounts before each test to prevent
+    state bleed between tests (real PostgreSQL backend).
     """
+    from app.database import engine
+    import asyncpg
+
+    # Truncate test tables for isolation
+    try:
+        db_url = settings.DATABASE_URL.replace("postgresql+asyncpg://", "postgresql://")
+        conn = await asyncpg.connect(db_url)
+        await conn.execute("TRUNCATE TABLE oauth_accounts, users CASCADE")
+        await conn.close()
+    except Exception:
+        pass  # table may not exist yet on first run
+
+    # Dispose the engine to get fresh connections in each test event loop
+    from app.database import engine
+    await engine.dispose()
+
     async with AsyncClient(
         transport=ASGITransport(app=app),
         base_url="http://test",
@@ -42,6 +61,9 @@ async def client():
         # Store token value for convenience
         ac._test_csrf_token = ac.cookies.get("csrftoken", "")  # type: ignore[attr-defined]
         yield ac
+    
+    # Dispose engine after test to release connections
+    await engine.dispose()
 
 
 def csrf_headers(client: AsyncClient) -> dict:
@@ -299,7 +321,8 @@ async def test_me_authenticated(client: AsyncClient):
             **csrf_headers(client),
         },
     )
-    assert login_res.status_code == 200
+    # FastAPI-Users CookieTransport returns 204 (no body) — cookie set in headers
+    assert login_res.status_code in (200, 204)
 
     # The httpx client stores cookies from login response automatically
     me_response = await client.get("/api/users/me")
