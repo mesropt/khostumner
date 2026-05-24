@@ -52,6 +52,13 @@ app.include_router(auth.router, prefix="/api")
 app.include_router(
     fastapi_users.get_auth_router(auth_backend_access), prefix="/api/auth", tags=["auth"]
 )
+# Register the refresh backend login route so the khostumner_refresh cookie is issued
+# at login time. Without this the 30-day refresh cookie is never set (WR-01).
+app.include_router(
+    fastapi_users.get_auth_router(auth_backend_refresh),
+    prefix="/api/auth/refresh-backend",
+    tags=["auth"],
+)
 app.include_router(
     fastapi_users.get_register_router(UserRead, UserCreate), prefix="/api/auth", tags=["auth"]
 )
