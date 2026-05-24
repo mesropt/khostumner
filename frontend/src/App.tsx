@@ -19,6 +19,7 @@ import ResetPasswordPage from "@/pages/ResetPasswordPage"
 import { AuthProvider } from "@/contexts/AuthContext"
 import RequireAuth from "@/components/RequireAuth"
 import PromiseSubmitPage from "@/pages/PromiseSubmitPage"
+import PromiseEditPage from "@/pages/PromiseEditPage"
 
 export default function App() {
   return (
@@ -42,6 +43,7 @@ export default function App() {
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route element={<RequireAuth />}>
             <Route path="/promises/new" element={<PromiseSubmitPage />} />
+            <Route path="/promises/:slug/edit" element={<PromiseEditPage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Route>
