@@ -175,7 +175,7 @@ Plans:
 Plans:
 
 **Wave 1 (blocking)**
-- [ ] 05-01-PLAN.md — Wave 0 scaffold: promise_edits migration + ORM models + Pydantic schemas + npm/pip deps + RED test stubs
+- [x] 05-01-PLAN.md — Wave 0 scaffold: promise_edits migration + ORM models + Pydantic schemas + npm/pip deps + RED test stubs
 
 **Wave 2 (parallel after Wave 1)**
 - [ ] 05-02-PLAN.md — Backend endpoints: POST /api/promises + PUT /api/promises/{slug} + account_age_days in UserRead
@@ -244,7 +244,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 | 2. Politicians, Parties & Elections Browsing | 4/4 | Complete   | 2026-05-22 |
 | 3. Promise Browsing & Homepage | 5/5 | Complete | 2026-05-23 |
 | 4. Authentication | 6/6 | Complete | 2026-05-24 |
-| 5. Promise Submission | 0/5 | Not started | - |
+| 5. Promise Submission | 1/5 | In Progress|  |
 | 6. Admin Moderation | 0/TBD | Not started | - |
 | 7. Community Voting & Status System | 0/TBD | Not started | - |
 | 8. Search & Statistics | 0/TBD | Not started | - |
