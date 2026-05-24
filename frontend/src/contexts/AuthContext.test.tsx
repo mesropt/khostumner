@@ -16,6 +16,7 @@ const mockUser: UserRead = {
   is_active: true,
   is_verified: true,
   role: "registered",
+  account_age_days: 0,
 }
 
 describe("authReducer", () => {

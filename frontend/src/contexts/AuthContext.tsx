@@ -15,6 +15,7 @@ export type UserRead = {
   is_active: boolean
   is_verified: boolean
   role: string
+  account_age_days: number
 }
 
 export type AuthState = {
