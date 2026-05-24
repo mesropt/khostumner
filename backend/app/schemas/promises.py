@@ -1,9 +1,9 @@
 import uuid
-from datetime import date
+from datetime import date, datetime
 
 from pydantic import BaseModel, ConfigDict
 
-from app.models.promises import ResolvedStatus
+from app.models.promises import ModerationStatus, ResolvedStatus
 
 
 class PromiseStubOut(BaseModel):
@@ -50,3 +50,66 @@ class PromiseDetailOut(BaseModel):
     archived_url: str | None
     politician_name_hy: str
     politician_slug: str
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Phase 5 — Promise Submission input/output schemas
+# ──────────────────────────────────────────────────────────────────────────────
+
+
+class PromiseCreateIn(BaseModel):
+    """Input schema for POST /api/promises.
+
+    NO from_attributes — this is a request body schema.
+    Backend auto-generates the slug from title_hy; user never sets it.
+    """
+
+    title_hy: str
+    quote_hy: str
+    source_url: str
+    politician_id: uuid.UUID
+    made_date: date | None = None
+    expected_date: date | None = None
+    description_hy: str | None = None
+    election_ids: list[uuid.UUID] = []
+
+
+class PromiseOut(BaseModel):
+    """Response schema for POST /api/promises.
+
+    NO from_attributes — constructed explicitly in the router.
+    """
+
+    id: uuid.UUID
+    slug: str
+    title_hy: str
+    moderation_status: ModerationStatus
+    created_at: datetime
+
+
+class PromiseEditIn(BaseModel):
+    """Input schema for PUT /api/promises/{slug}.
+
+    Full snapshot of all editable fields (D-05).
+    NO from_attributes — this is a request body schema.
+    """
+
+    title_hy: str
+    quote_hy: str
+    source_url: str
+    made_date: date | None = None
+    expected_date: date | None = None
+    description_hy: str | None = None
+    election_ids: list[uuid.UUID] = []
+
+
+class PromiseEditOut(BaseModel):
+    """Response schema for PUT /api/promises/{slug}.
+
+    NO from_attributes — constructed explicitly in the router.
+    """
+
+    id: uuid.UUID
+    promise_id: uuid.UUID
+    moderation_status: ModerationStatus
+    created_at: datetime

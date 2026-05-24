@@ -13,3 +13,4 @@ starlette-csrf==3.0.0
 python-multipart==0.0.29
 httpx-oauth==0.17.0
 bcrypt==5.0.0
+python-slugify==8.0.4
