@@ -38,8 +38,15 @@ export default function VerifyEmailPage() {
       },
       body: JSON.stringify({ token }),
     })
-      .then((res) => {
+      .then(async (res) => {
         if (res.ok) {
+          setStatus("success")
+          return
+        }
+        // VERIFY_USER_ALREADY_VERIFIED means a prior request (e.g. StrictMode double-effect)
+        // already consumed the token successfully — treat it as success.
+        const body = await res.json().catch(() => ({}))
+        if (body?.detail === "VERIFY_USER_ALREADY_VERIFIED") {
           setStatus("success")
         } else {
           setStatus("error")
