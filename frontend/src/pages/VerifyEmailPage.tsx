@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useSearchParams, Link } from "react-router-dom"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
@@ -18,12 +18,16 @@ export default function VerifyEmailPage() {
   const [status, setStatus] = useState<"loading" | "success" | "error">("loading")
 
   const token = searchParams.get("token")
+  const attempted = useRef(false)
 
   useEffect(() => {
     if (!token) {
       setStatus("error")
       return
     }
+    // Guard against React StrictMode double-invocation — token is one-time-use.
+    if (attempted.current) return
+    attempted.current = true
 
     fetch(`${API_BASE}/api/auth/verify`, {
       method: "POST",
