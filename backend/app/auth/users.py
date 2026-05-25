@@ -32,6 +32,9 @@ class UserManager(UUIDIDMixin, BaseUserManager[User, uuid.UUID]):
         # visible (CR-07).
         if not user.display_name:
             await self.user_db.update(user, {"display_name": user.email.split("@")[0]})
+        # Send verification email automatically on registration (OAuth users are pre-verified).
+        if not user.is_verified:
+            await self.request_verify(user, request)
 
     async def on_after_login(self, user: User, request=None, response=None):
         # Recompute and persist account_age_days on every login so Phase 7 vote
