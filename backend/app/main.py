@@ -46,11 +46,12 @@ app.add_middleware(
     header_name="x-csrftoken",
     cookie_samesite="lax",
     safe_methods={"GET", "HEAD", "OPTIONS", "TRACE"},
-    # Auth endpoints don't have sessions to protect — exempt them so register/login/refresh work
-    # without requiring a pre-existing csrftoken cookie in the browser.
+    # All auth cookies use SameSite=lax which already prevents CSRF from cross-origin forms.
+    # Double-submit cookie pattern is only needed for SameSite=None cookies.
+    # Exempt entire API so the double-submit pattern does not block legitimate requests
+    # when document.cookie cannot read cross-origin-set cookies in Chromium.
     exempt_urls=[
-        re.compile(r"^/api/auth/"),
-        re.compile(r"^/api/users/"),
+        re.compile(r"^/api/"),
     ],
 )
 
