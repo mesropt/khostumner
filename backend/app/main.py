@@ -1,3 +1,4 @@
+import re
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
@@ -45,6 +46,12 @@ app.add_middleware(
     header_name="x-csrftoken",
     cookie_samesite="lax",
     safe_methods={"GET", "HEAD", "OPTIONS", "TRACE"},
+    # Auth endpoints don't have sessions to protect — exempt them so register/login/refresh work
+    # without requiring a pre-existing csrftoken cookie in the browser.
+    exempt_urls=[
+        re.compile(r"^/api/auth/"),
+        re.compile(r"^/api/users/"),
+    ],
 )
 
 # Auth routers (registered before other routers — alphabetically first)
