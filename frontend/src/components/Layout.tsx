@@ -34,6 +34,9 @@ export default function Layout() {
           <NavLink to="/" className={navLinkClass} end>
             <span className="font-bold text-lg text-zinc-900">Խոստումներ</span>
           </NavLink>
+          <NavLink to="/promises" className={navLinkClass}>
+            Բոլոր խոստումները
+          </NavLink>
           <NavLink to="/fulfilled" className={navLinkClass}>
             Կատարված
           </NavLink>
